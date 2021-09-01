@@ -51,7 +51,7 @@ export class CadastrarFabricanteComponent implements OnInit {
   }
 
   findFabricanteById(id: number) {
-    this.fabricanteService.findFabricanteById(id).subscribe;
+    this.fabricanteService.findFabricanteById(id).subscribe();
   }
 
   saveFabricante(): void {

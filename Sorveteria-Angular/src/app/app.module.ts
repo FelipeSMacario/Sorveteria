@@ -8,6 +8,8 @@ import { NavBarComponent } from './shared/nav-bar/nav-bar.component';
 import { FabricanteComponent } from './fabricante/listar-fabricante/fabricante.component';
 import { CadastrarFabricanteComponent } from './fabricante/cadastrar-fabricante/cadastrar-fabricante.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ListarSorveteComponent } from './sorvete/listar-sorvete/listar-sorvete.component';
+import { CadastrarSorveteComponent } from './sorvete/cadastrar-sorvete/cadastrar-sorvete.component';
 
 
 
@@ -17,6 +19,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     NavBarComponent,
     FabricanteComponent,
     CadastrarFabricanteComponent,
+    ListarSorveteComponent,
+    CadastrarSorveteComponent,
     
   ],
   imports: [

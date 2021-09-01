@@ -1,0 +1,45 @@
+<h2 class="text-center text-center">Sorvete</h2>
+
+<div class="form-group row">
+  <label
+    class="col-sm-2 col-form-label"
+    style="font-weight: bold; font-size: 25px"
+    >Buscar:</label
+  >
+
+  <div class="col-sm-9">
+    <input class="form-control" />
+  </div>
+  <div class="col-sm-1">
+    <a
+      [routerLink]="['novo']"
+      class="btn btn-success"
+      style="width: 82px; height: 38px"
+      >Criar</a
+    >
+  </div>
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Nome</th>
+      <th>Sabor</th>
+      <th>Fabricante</th>
+      <th>Opções</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let sorv of sorvete">
+      <td>{{ sorv.id }}</td>
+      <td>{{ sorv.nome }}</td>
+      <td>{{ sorv.sabor }}</td>
+      <td>{{ sorv.fabricante.nome }}</td>
+      <td>
+        <a class="btn btn-primary" style="margin-right: 2px" (click)="edit(sorv.id)">Editar</a>
+        <button class="btn btn-danger" (click)="deleteSorvete(sorv.id)">Excluir</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

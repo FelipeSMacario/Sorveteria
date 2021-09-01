@@ -1,0 +1,55 @@
+<h2 class="text-center text-center">Cadastro de Sorvete</h2>
+
+<hr />
+
+<form [formGroup]="cadastro" (ngSubmit)="saveSorvete()">
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label">Nome</label>
+    <div class="col-sm-10">
+      <input
+        class="form-control"
+        formControlName="nome"
+        type="text"
+        placeholder="Nome do sorvete"
+      />
+    </div>
+  </div>
+
+  <br />
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label">Sabor</label>
+    <div class="col-sm-10">
+      <input
+        class="form-control"
+        formControlName="sabor"
+        type="text"
+        placeholder="Sabor do sorvete"
+      />
+    </div>
+  </div>
+  <br />
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label">Fabricante</label>
+    <div class="col-sm-10">
+      <select
+        class="form-select"
+        aria-label="Default select example"
+        formControlName="fabricante"
+      >
+        <option disabled selected>Selecione um fabricante</option>
+        <option *ngFor="let fabri of fabricante" [ngValue]="fabri">
+          {{ fabri.nome }}
+        </option>
+      </select>
+    </div>
+  </div>
+  <br />
+  <div class="text-center">
+    <button class="btn btn-primary" style="margin-right: 8px" type="submit">
+      Salvar
+    </button>
+    <button class="btn btn-secondary" type="button" [routerLink]="['/sorvete']">
+      Voltar
+    </button>
+  </div>
+</form>
