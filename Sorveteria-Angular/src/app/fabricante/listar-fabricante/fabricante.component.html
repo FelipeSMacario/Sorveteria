@@ -1,0 +1,35 @@
+<h2 class="text-center text-center">Fabricantes</h2>
+
+<div class="form-group row">
+    <label class="col-sm-2 col-form-label" style="font-weight: bold; font-size:25px;">Buscar:</label>
+    
+    <div class="col-sm-9">
+        <input class="form-control">
+    </div>
+    <div class="col-sm-1">
+        <a [routerLink]="['novo']" class="btn btn-success" style="width: 82px; height: 38px;">Criar</a>
+    </div>
+
+</div>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nome</th>
+            <th>Contato</th>
+            <th>Opções</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let fabri of fabricantes">
+            <td>{{fabri.id}}</td>
+            <td>{{fabri.nome}}</td>
+            <td>{{fabri.contato}}</td>
+            <td>
+                <a class="btn btn-primary" style="margin-right: 2px;" (click)="edit(fabri.id)" >Editar</a>
+                <button  class="btn btn-danger" (click)="deleteFabricante(fabri.id)">Excluir</button>
+            </td>
+        </tr>
+    </tbody>
+</table>

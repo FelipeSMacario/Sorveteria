@@ -1,0 +1,27 @@
+<h2 class="text-center text-center">Cadastro de Fabricantes</h2>
+
+<hr/>
+
+<form [formGroup]="cadastro" (ngSubmit)="saveFabricante()">
+    
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Nome</label>
+        <div class="col-sm-10">
+            <input class="form-control" formControlName="nome" type="text" placeholder="Nome do fabricante">
+        </div>
+    </div>
+
+    <br>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Contato</label>
+        <div class="col-sm-10">
+            <input class="form-control" formControlName="contato" type="text" placeholder="Contato do fabricante">
+        </div>
+    </div>
+    <br>
+    <div class="text-center">
+        <button  class="btn btn-primary" style="margin-right: 8px;" type="submit">Salvar</button>
+        <button  class="btn btn-secondary" type="button" [routerLink]="['/fabricante']" >Voltar</button>
+    </div>
+</form>
+
