@@ -15,6 +15,7 @@ import { SorveteService } from '../sorvete.service';
 export class CadastrarSorveteComponent implements OnInit {
   fabricante : Fabricante[] = [];
   cadastro: FormGroup;
+  id : number;
 
   constructor(
     private fb: FormBuilder,
@@ -27,12 +28,15 @@ export class CadastrarSorveteComponent implements OnInit {
 
     this.findAllFabricantes();
 
-    this.activatedRoute.params
-      .pipe(
-        map((params: any) => params['id']),
-        switchMap((id) => this.sorveteService.findSorveteById(id))
-      )
-      .subscribe((sorvete) => this.updateForm(sorvete));
+    this.id = this.activatedRoute.snapshot.params["id"];
+    
+    if(this.id) {
+      this.sorveteService.findSorveteById(this.id).subscribe((sorvete : Sorvete) => this.criarFormulario(sorvete));
+    }
+    else {
+      this.criarFormulario(this.formularioVazio());
+    }
+   
 
     this.cadastro = this.fb.group({
       id: [null],
@@ -40,6 +44,24 @@ export class CadastrarSorveteComponent implements OnInit {
       sabor: [null, [Validators.required]],
       fabricante: [null, [Validators.required]],
     });
+  }
+
+  criarFormulario(sorvete : Sorvete) : void {
+    this.cadastro = this.fb.group({
+      id : [sorvete.id,],
+      nome : [sorvete.nome,[Validators.required]],
+      sabor : [sorvete.sabor, [Validators.required]],
+      fabricante : [sorvete.fabricante, [Validators.required]]
+    })
+  }
+
+  formularioVazio() : Sorvete {
+    return {
+      id: null,
+      nome: null,
+      sabor: null,
+      fabricante: null
+    } as unknown as Sorvete
   }
 
   findAllFabricantes(): void {

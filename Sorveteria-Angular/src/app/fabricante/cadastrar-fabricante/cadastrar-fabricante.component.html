@@ -2,7 +2,7 @@
 
 <hr/>
 
-<form [formGroup]="cadastro" (ngSubmit)="saveFabricante()">
+<form [formGroup]="cadastro" (ngSubmit)="saveFabricante()" *ngIf='cadastro' >
     
     <div class="form-group row">
         <label class="col-sm-2 col-form-label">Nome</label>

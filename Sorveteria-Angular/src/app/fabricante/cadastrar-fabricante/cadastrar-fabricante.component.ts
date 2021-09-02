@@ -18,6 +18,7 @@ import { FabricanteService } from '../fabricante.service';
 export class CadastrarFabricanteComponent implements OnInit {
   cadastro: FormGroup;
   fabricante: Fabricante;
+  id : number;
 
   constructor(
     private fb: FormBuilder,
@@ -27,29 +28,32 @@ export class CadastrarFabricanteComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.activatedRoute.params
-    .pipe(
-      map((params: any) => params['id']),
-      switchMap(id => this.fabricanteService.findFabricanteById(id))
-      )
-    .subscribe(
-      fabricante => this.updateForm(fabricante));
-    
+    this.id = this.activatedRoute.snapshot.params['id'];
+    if (this.id) {
+      this.fabricanteService.findFabricanteById(this.id).subscribe((fabricante: Fabricante) => this.criarFormulario(fabricante));
+    }  else { 
+        this.criarFormulario(this.criarFilmeEmBranco());
+      }
 
+  }
+
+  criarFormulario(fabricante : Fabricante) : void{
     this.cadastro = this.fb.group({
-      id: [null],
-      nome: [null, [Validators.required]],
-      contato: [null, [Validators.required]],
+      id: [fabricante.id],
+      nome: [fabricante.nome, [Validators.required]],
+      contato: [fabricante.contato, [Validators.required]],
     });
   }
 
-  updateForm(fabricante: Fabricante) {
-    this.cadastro.patchValue({
-      id: fabricante.id,
-      nome: fabricante.nome,
-      contato: fabricante.contato,
-    });
+  criarFilmeEmBranco(): Fabricante {
+    return {
+      id: null,
+      nome: null,
+      contato: null,
+    } as unknown as Fabricante;
   }
+
+
 
   findFabricanteById(id: number) {
     this.fabricanteService.findFabricanteById(id).subscribe();
@@ -57,11 +61,11 @@ export class CadastrarFabricanteComponent implements OnInit {
 
   saveFabricante(): void {
     this.fabricanteService.saveFabricante(this.cadastro.value).subscribe({
-      next: (course) => {
-        console.log('Saved with sucess', course);
+      next: (fabricante) => {
+        console.log('Salvo com sucesso', fabricante);
         this.cadastro.reset();
       },
-      error: (err) => console.log('Error', err),
+      error: (err) => console.log('Erro', err),
     });
   }
 }
