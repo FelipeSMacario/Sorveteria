@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { EMPTY, Observable } from 'rxjs';
+import { switchMap, take } from 'rxjs/operators';
+import { ModalService } from 'src/app/shared/modal/modal.service';
 import { Sorvete } from '../sorvete.model';
 import { SorveteService } from '../sorvete.service';
 
@@ -15,7 +17,9 @@ export class ListarSorveteComponent implements OnInit {
 
   constructor(
     private sorveteService : SorveteService,
-    private router : Router) { }
+    private router : Router,
+    private modalService : ModalService)
+     { }
 
   ngOnInit(): void {
     this.findAllSorvete();
@@ -32,11 +36,15 @@ export class ListarSorveteComponent implements OnInit {
     this.router.navigate( ["sorvete/novo", id]);
   }
 
-  deleteSorvete(id : number) {
-    this.sorveteService.deleteSorvete(id).subscribe({
-      next : () => {console.log("Deletado com sucesso"); this.findAllSorvete()},
-      error : err => console.log("Erro", err)
-    })
+  modalDelete(sorvete : Sorvete) {
+    const result$ = this.modalService.showConfirm("Confirmar exclusão", "Deseja excluir o sorvete?");
+    result$.asObservable().pipe(
+      take(1),
+      switchMap(result => result ? this.sorveteService.deleteSorvete(sorvete.id) : EMPTY)
+    ).subscribe(
+      sucess => {console.log("Deletado com sucesso"); this.findAllSorvete()},
+      error  => console.log("Erro", error)
+    )
   }
 
 }

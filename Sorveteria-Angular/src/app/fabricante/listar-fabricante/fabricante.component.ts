@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { EMPTY } from 'rxjs';
+import { switchMap, take } from 'rxjs/operators';
+import { ModalService } from 'src/app/shared/modal/modal.service';
 import { Fabricante } from '../fabricante.model';
 import { FabricanteService } from '../fabricante.service';
 
@@ -14,6 +17,7 @@ export class FabricanteComponent implements OnInit {
   constructor(
     private fabricanteService: FabricanteService,
     private router: Router,
+    private modalService : ModalService
   ) {}
 
   ngOnInit(): void {
@@ -31,10 +35,14 @@ export class FabricanteComponent implements OnInit {
     this.router.navigate(['fabricante/novo', id]);
   }
 
-  deleteFabricante(id : number) {
-    this.fabricanteService.deleteFabricante(id).subscribe({
-      next : () => {console.log("Deletado com sucesso!"); this.findAllFabricantes()},
-      error : err => console.log("Erro", err)
-    })
+  modalDelete(fabricante : Fabricante){
+    const result$ = this.modalService.showConfirm("Confirma exclusão", "Deseja excluir permanentemente o fabricante?" );
+    result$.asObservable().pipe(
+      take(1),
+      switchMap(result => result ? this.fabricanteService.deleteFabricante(fabricante.id) : EMPTY)
+    ).subscribe(
+      sucess => {console.log("Removido com sucesso!"); this.findAllFabricantes()},
+      error => console.log("Erro ao remover o fabricante")
+    )
   }
 }

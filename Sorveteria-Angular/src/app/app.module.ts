@@ -12,6 +12,7 @@ import { ListarSorveteComponent } from './sorvete/listar-sorvete/listar-sorvete.
 import { CadastrarSorveteComponent } from './sorvete/cadastrar-sorvete/cadastrar-sorvete.component';
 import { ModalComponent } from './shared/modal/modal.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 
 
@@ -33,7 +34,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ReactiveFormsModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [BsModalService, ModalComponent, BsModalRef],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

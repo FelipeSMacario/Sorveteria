@@ -9,6 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Fabricante } from '../fabricante.model';
 import { FabricanteService } from '../fabricante.service';
 
+
 @Component({
   selector: 'app-cadastrar-fabricante',
   templateUrl: './cadastrar-fabricante.component.html',
@@ -21,7 +22,7 @@ export class CadastrarFabricanteComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private fabricanteService: FabricanteService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
   ) {}
 
   ngOnInit(): void {
