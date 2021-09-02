@@ -38,7 +38,7 @@ export class CadastrarSorveteComponent implements OnInit {
       id: [null],
       nome: [null, [Validators.required]],
       sabor: [null, [Validators.required]],
-      fabricante: ["Selecione um fabricante", [Validators.required]],
+      fabricante: [null, [Validators.required]],
     });
   }
 
@@ -54,8 +54,8 @@ export class CadastrarSorveteComponent implements OnInit {
       id: sorvete.id,
       nome: sorvete.nome,
       sabor: sorvete.sabor,
-      fabricante: sorvete.fabricante,
-    });
+      fabricante: sorvete.fabricante
+    }); 
   }
 
   findSorveteById(id: number) {
@@ -70,5 +70,9 @@ export class CadastrarSorveteComponent implements OnInit {
       },
       error: (err) => console.log('Erro', err),
     });
+  }
+
+  compararFabricante(obj1 : any, obj2 : any) {
+    return obj1 && obj2 ? (obj1.id === obj2.id) : obj1 && obj2;
   }
 }

@@ -10,6 +10,8 @@ import { CadastrarFabricanteComponent } from './fabricante/cadastrar-fabricante/
 import { ReactiveFormsModule } from '@angular/forms';
 import { ListarSorveteComponent } from './sorvete/listar-sorvete/listar-sorvete.component';
 import { CadastrarSorveteComponent } from './sorvete/cadastrar-sorvete/cadastrar-sorvete.component';
+import { ModalComponent } from './shared/modal/modal.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -21,13 +23,15 @@ import { CadastrarSorveteComponent } from './sorvete/cadastrar-sorvete/cadastrar
     CadastrarFabricanteComponent,
     ListarSorveteComponent,
     CadastrarSorveteComponent,
+    ModalComponent,
     
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
