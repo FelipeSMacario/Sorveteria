@@ -13,6 +13,7 @@ import { CadastrarSorveteComponent } from './sorvete/cadastrar-sorvete/cadastrar
 import { ModalComponent } from './shared/modal/modal.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { HomeComponent } from './shared/home/home.component';
 
 
 
@@ -25,6 +26,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
     ListarSorveteComponent,
     CadastrarSorveteComponent,
     ModalComponent,
+    HomeComponent,
     
   ],
   imports: [
