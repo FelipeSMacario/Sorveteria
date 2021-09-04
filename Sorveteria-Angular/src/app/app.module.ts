@@ -21,6 +21,8 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
+import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
 
 
 
@@ -36,7 +38,7 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
     CadastrarSorveteComponent,
     ModalComponent,
     HomeComponent,
-    DatePickeComponent,
+    DatePickeComponent
     
   ],
   imports: [
@@ -49,6 +51,8 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
     MatFormFieldModule,
     MatInputModule, 
     MatNativeDateModule,
+    MatButtonModule,
+    MatIconModule,
     BsDatepickerModule.forRoot(),
   ],
   providers: [BsModalService,
