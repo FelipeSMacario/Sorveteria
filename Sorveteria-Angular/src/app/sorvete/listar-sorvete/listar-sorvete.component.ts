@@ -37,13 +37,15 @@ export class ListarSorveteComponent implements OnInit {
   }
 
   modalDelete(sorvete : Sorvete) {
-    const result$ = this.modalService.showConfirm("Confirmar exclusão", "Deseja excluir o sorvete?");
+    const result$ = this.modalService.showConfirm("Confirmar exclusão", "Deseja excluir o sorvete?", "Confirmar", "Excluir", "danger");
     result$.asObservable().pipe(
       take(1),
       switchMap(result => result ? this.sorveteService.deleteSorvete(sorvete.id) : EMPTY)
     ).subscribe(
-      sucess => {console.log("Deletado com sucesso"); this.findAllSorvete()},
-      error  => console.log("Erro", error)
+      sucess => {this.modalService.handleMessage("Sorvete excluído com sucesso", "success"); this.findAllSorvete()},
+      error  => {
+        this.modalService.handleMessage("Erro ao eccluir o sorvete, tente novamente mais tarde", "danger");
+        console.log("Erro", error);}
     )
   }
 

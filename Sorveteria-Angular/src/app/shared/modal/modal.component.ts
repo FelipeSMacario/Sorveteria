@@ -9,10 +9,11 @@ import { Subject } from 'rxjs';
 })
 export class ModalComponent implements OnInit {
 
-  @Input()title : string;
-  @Input()msg : string;
-  @Input()txtOk : string = "Confirmar";
-  @Input()txtCancel : string = "Cancelar";
+  @Input() title : string;
+  @Input() msg : string;
+  @Input() txtOk : string = "Confirmar";
+  @Input() txtCancel : string = "Cancelar";
+  @Input() type : string = "primary";
 
   constructor(
     private bsModalRef : BsModalRef

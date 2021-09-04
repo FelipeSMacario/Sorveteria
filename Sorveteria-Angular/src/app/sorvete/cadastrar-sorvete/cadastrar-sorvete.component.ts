@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Fabricante } from 'src/app/fabricante/fabricante.model';
 import { FabricanteService } from 'src/app/fabricante/fabricante.service';
+import { ModalService } from 'src/app/shared/modal/modal.service';
 import { Sorvete } from '../sorvete.model';
 import { SorveteService } from '../sorvete.service';
 
@@ -20,7 +21,8 @@ export class CadastrarSorveteComponent implements OnInit {
     private fb: FormBuilder,
     private sorveteService: SorveteService,
     private activatedRoute: ActivatedRoute,
-    private fabricanteService : FabricanteService
+    private fabricanteService : FabricanteService,
+    private modalService : ModalService 
   ) {}
 
   ngOnInit(): void {
@@ -101,10 +103,13 @@ export class CadastrarSorveteComponent implements OnInit {
   saveSorvete(): void {
     this.sorveteService.saveSorvete(this.cadastro.value).subscribe({
       next: (sorvete) => {
+        this.modalService.handleMessage("Sorvete cadastrado com sucesso", "success");
         console.log('Cadastrado com sucesso', sorvete);
         this.cadastro.reset();
       },
-      error: (err) => console.log('Erro', err),
+      error: (err) => {
+        this.modalService.handleMessage("Erro ao cadastrar o sorvete", "danger");
+        console.log('Erro', err);}
     });
   }
 

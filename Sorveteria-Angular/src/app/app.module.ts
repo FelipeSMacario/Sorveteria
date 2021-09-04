@@ -12,9 +12,8 @@ import { ListarSorveteComponent } from './sorvete/listar-sorvete/listar-sorvete.
 import { CadastrarSorveteComponent } from './sorvete/cadastrar-sorvete/cadastrar-sorvete.component';
 import { ModalComponent } from './shared/modal/modal.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef, BsModalService, ModalModule } from 'ngx-bootstrap/modal';
 import { HomeComponent } from './shared/home/home.component';
-import { DatePickeComponent } from './shared/date-picke/date-picke.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
@@ -23,6 +22,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
+import { AlertModalComponent } from './shared/alert-modal/alert-modal.component';
 
 
 
@@ -38,7 +38,7 @@ import {MatIconModule} from '@angular/material/icon';
     CadastrarSorveteComponent,
     ModalComponent,
     HomeComponent,
-    DatePickeComponent
+    AlertModalComponent,
     
   ],
   imports: [
@@ -47,6 +47,7 @@ import {MatIconModule} from '@angular/material/icon';
     HttpClientModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    ModalModule,
     MatDatepickerModule,
     MatFormFieldModule,
     MatInputModule, 

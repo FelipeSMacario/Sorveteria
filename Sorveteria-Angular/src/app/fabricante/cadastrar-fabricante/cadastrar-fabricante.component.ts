@@ -8,6 +8,7 @@ import {
 import { ActivatedRoute } from '@angular/router';
 import { Fabricante } from '../fabricante.model';
 import { FabricanteService } from '../fabricante.service';
+import { ModalService } from 'src/app/shared/modal/modal.service';
 
 
 @Component({
@@ -24,6 +25,7 @@ export class CadastrarFabricanteComponent implements OnInit {
     private fb: FormBuilder,
     private fabricanteService: FabricanteService,
     private activatedRoute: ActivatedRoute,
+    private modaService : ModalService
   ) {}
 
   ngOnInit(): void {
@@ -62,10 +64,13 @@ export class CadastrarFabricanteComponent implements OnInit {
   saveFabricante(): void {
     this.fabricanteService.saveFabricante(this.cadastro.value).subscribe({
       next: (fabricante) => {
+        this.modaService.handleMessage("Fabricante cadastrado com sucesso", "success");
         console.log('Salvo com sucesso', fabricante);
         this.cadastro.reset();
       },
-      error: (err) => console.log('Erro', err),
+      error: (err) => {
+        this.modaService.handleMessage("Erro ao cadastrar o fabricante", "danger");
+        console.log('Erro', err)},
     });
   }
 }

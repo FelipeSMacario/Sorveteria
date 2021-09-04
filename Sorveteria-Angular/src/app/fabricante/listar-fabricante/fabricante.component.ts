@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { EMPTY } from 'rxjs';
 import { switchMap, take } from 'rxjs/operators';
+import { AlertModalComponent } from 'src/app/shared/alert-modal/alert-modal.component';
 import { ModalService } from 'src/app/shared/modal/modal.service';
 import { Fabricante } from '../fabricante.model';
 import { FabricanteService } from '../fabricante.service';
@@ -13,6 +15,7 @@ import { FabricanteService } from '../fabricante.service';
 })
 export class FabricanteComponent implements OnInit {
   fabricantes: Fabricante[] = [];
+  bsModalRef : BsModalRef;
 
   constructor(
     private fabricanteService: FabricanteService,
@@ -36,13 +39,14 @@ export class FabricanteComponent implements OnInit {
   }
 
   modalDelete(fabricante : Fabricante){
-    const result$ = this.modalService.showConfirm("Confirma exclusão", "Deseja excluir permanentemente o fabricante?" );
+    const result$ = this.modalService.showConfirm("Confirma exclusão", "Deseja excluir permanentemente o fabricante?", "Confirmar", "Excluir", "danger" );
     result$.asObservable().pipe(
       take(1),
       switchMap(result => result ? this.fabricanteService.deleteFabricante(fabricante.id) : EMPTY)
     ).subscribe(
-      sucess => {console.log("Removido com sucesso!"); this.findAllFabricantes()},
-      error => console.log("Erro ao remover o fabricante")
+      sucess => {this.modalService.handleMessage("Sorvete excluído com sucesso", "success"); this.findAllFabricantes()},
+      error => this.modalService.handleMessage("Erro ao excluir o sorvete, tente novamente mais tarde", "danger")
     )
   }
+
 }
