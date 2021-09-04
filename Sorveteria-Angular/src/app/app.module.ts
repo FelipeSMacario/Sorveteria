@@ -20,6 +20,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
+
 
 
 
@@ -53,7 +55,9 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
               ModalComponent, 
               BsModalRef, 
               MatNativeDateModule, 
-              MatDatepickerModule,   ],
+              MatDatepickerModule, 
+              { provide: MAT_DATE_LOCALE, useValue: 'pt' }
+              ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
