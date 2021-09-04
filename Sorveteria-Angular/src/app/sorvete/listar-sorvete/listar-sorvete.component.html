@@ -23,18 +23,24 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th>Id</th>
       <th>Nome</th>
       <th>Sabor</th>
+      <th>Valor</th>
+      <th>Valor de Fábrica</th>
+      <th>Data da Compra</th>
+      <th>Data da Validade</th>
       <th>Fabricante</th>
       <th>Opções</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let sorv of sorvete">
-      <td>{{ sorv.id }}</td>
-      <td>{{ sorv.nome }}</td>
-      <td>{{ sorv.sabor }}</td>
+      <td>{{ sorv.nome | titlecase}}</td>
+      <td>{{ sorv.sabor | titlecase}}</td>
+      <td>{{ sorv.valor | currency:"R$ " }}</td>
+      <td>{{ sorv.valorFabrica | currency:"R$ "}}</td>
+      <td>{{ sorv.dtCompra | date:"dd/MM/YYYY" }}</td>
+      <td>{{ sorv.dtValidade | date:"dd/MM/YYYY"}}</td>
       <td>{{ sorv.fabricante.nome }}</td>
       <td>
         <a class="btn btn-primary" style="margin-right: 2px" (click)="edit(sorv.id)">Editar</a>

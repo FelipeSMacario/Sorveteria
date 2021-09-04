@@ -14,6 +14,13 @@ import { ModalComponent } from './shared/modal/modal.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { HomeComponent } from './shared/home/home.component';
+import { DatePickeComponent } from './shared/date-picke/date-picke.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatInputModule } from '@angular/material/input';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+
 
 
 
@@ -27,6 +34,7 @@ import { HomeComponent } from './shared/home/home.component';
     CadastrarSorveteComponent,
     ModalComponent,
     HomeComponent,
+    DatePickeComponent,
     
   ],
   imports: [
@@ -34,9 +42,18 @@ import { HomeComponent } from './shared/home/home.component';
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatDatepickerModule,
+    MatFormFieldModule,
+    MatInputModule, 
+    MatNativeDateModule,
+    BsDatepickerModule.forRoot(),
   ],
-  providers: [BsModalService, ModalComponent, BsModalRef],
+  providers: [BsModalService,
+              ModalComponent, 
+              BsModalRef, 
+              MatNativeDateModule, 
+              MatDatepickerModule,   ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

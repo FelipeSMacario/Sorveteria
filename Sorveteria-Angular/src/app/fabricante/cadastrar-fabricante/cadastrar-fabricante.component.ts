@@ -32,7 +32,7 @@ export class CadastrarFabricanteComponent implements OnInit {
     if (this.id) {
       this.fabricanteService.findFabricanteById(this.id).subscribe((fabricante: Fabricante) => this.criarFormulario(fabricante));
     }  else { 
-        this.criarFormulario(this.criarFilmeEmBranco());
+        this.criarFormulario(this.formularioVazio());
       }
 
   }
@@ -45,7 +45,7 @@ export class CadastrarFabricanteComponent implements OnInit {
     });
   }
 
-  criarFilmeEmBranco(): Fabricante {
+  formularioVazio(): Fabricante {
     return {
       id: null,
       nome: null,

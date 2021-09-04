@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { map, switchMap } from 'rxjs/operators';
 import { Fabricante } from 'src/app/fabricante/fabricante.model';
 import { FabricanteService } from 'src/app/fabricante/fabricante.service';
 import { Sorvete } from '../sorvete.model';
@@ -42,7 +41,11 @@ export class CadastrarSorveteComponent implements OnInit {
       id: [null],
       nome: [null, [Validators.required]],
       sabor: [null, [Validators.required]],
-      fabricante: [null, [Validators.required]],
+      valor :  [null, [Validators.required]],
+      valorFabrica :  [null, [Validators.required]],
+      dtCompra :  [null, [Validators.required]],
+      dtValidade :  [null, [Validators.required]],
+      fabricante : [null, [Validators.required]]
     });
   }
 
@@ -51,6 +54,10 @@ export class CadastrarSorveteComponent implements OnInit {
       id : [sorvete.id,],
       nome : [sorvete.nome,[Validators.required]],
       sabor : [sorvete.sabor, [Validators.required]],
+      valor : [sorvete.valor, [Validators.required]],
+      valorFabrica : [sorvete.valorFabrica, [Validators.required]],
+      dtCompra : [sorvete.dtCompra, [Validators.required]],
+      dtValidade : [sorvete.dtValidade, [Validators.required]],
       fabricante : [sorvete.fabricante, [Validators.required]]
     })
   }
@@ -60,6 +67,10 @@ export class CadastrarSorveteComponent implements OnInit {
       id: null,
       nome: null,
       sabor: null,
+      valor : null,
+      valorFabrica : null,
+      dtCompra : null,
+      dtValidade : null,
       fabricante: null
     } as unknown as Sorvete
   }
@@ -76,7 +87,10 @@ export class CadastrarSorveteComponent implements OnInit {
       id: sorvete.id,
       nome: sorvete.nome,
       sabor: sorvete.sabor,
-      fabricante: sorvete.fabricante
+      valorFabrica : sorvete.valorFabrica,
+      dtCompra : sorvete.dtCompra,
+      dtValidade : sorvete.dtValidade,
+      fabricante: sorvete.fabricante,
     }); 
   }
 

@@ -27,7 +27,64 @@
       />
     </div>
   </div>
+
   <br />
+
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label">Valor de Venda</label>
+    <div class="col-sm-10">
+      <input
+        class="form-control"
+        formControlName="valor"
+        type="number"
+        placeholder="Valor de venda do sorvete"
+      />
+    </div>
+  </div>
+  <br />
+
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label">Valor de Fábrica</label>
+    <div class="col-sm-10">
+      <input
+        class="form-control"
+        formControlName="valorFabrica"
+        type="number"
+        placeholder="Valor de fábrica do sorvete"
+      />
+    </div>
+  </div>
+
+  <br />
+
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label">Data da Compra </label>
+    <div class="col-sm-10">
+      <mat-form-field appearance="fill">
+        <mat-label>Compra</mat-label>
+        <input readonly matInput [matDatepicker]="picker" formControlName="dtCompra" (click)="picker.open()">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label">Data da Validade </label>
+    <div class="col-sm-10">
+      <mat-form-field appearance="fill">
+        <mat-label>Validade</mat-label>
+        <input readonly matInput [matDatepicker]="picker1" formControlName="dtValidade" (click)="picker.open()">
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+    </mat-form-field>
+    </div>
+  </div> 
+
+  <br>
+
   <div class="form-group row">
     <label class="col-sm-2 col-form-label">Fabricante</label>
     <div class="col-sm-10">
@@ -35,12 +92,17 @@
         class="form-control"
         aria-label="Default select example"
         formControlName="fabricante"
-        [compareWith]="compararFabricante">        
+        [compareWith]="compararFabricante"
+      >
         <option value="null" disabled selected>Selecione um fabricante</option>
-        <option *ngFor="let fabri of fabricante"  [ngValue]="fabri">{{fabri.nome}}</option>
+        <option *ngFor="let fabri of fabricante" [ngValue]="fabri">
+          {{ fabri.nome }}
+        </option>
       </select>
     </div>
   </div>
+
+  
   <br />
   <div class="text-center">
     <button class="btn btn-primary" style="margin-right: 8px" type="submit">
