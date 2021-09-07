@@ -39,7 +39,7 @@ export class FabricanteComponent implements OnInit {
   }
 
   modalDelete(fabricante : Fabricante){
-    const result$ = this.modalService.showConfirm("Confirma exclusão", "Deseja excluir permanentemente o fabricante?", "Confirmar", "Excluir", "danger" );
+    const result$ = this.modalService.showConfirm("Confirma exclusão", "Deseja excluir permanentemente o fabricante?", "Confirmar", "Cancelar", "danger" );
     result$.asObservable().pipe(
       take(1),
       switchMap(result => result ? this.fabricanteService.deleteFabricante(fabricante.id) : EMPTY)

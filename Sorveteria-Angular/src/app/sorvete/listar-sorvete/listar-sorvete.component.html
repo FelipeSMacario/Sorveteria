@@ -43,9 +43,19 @@
       <td>{{ sorv.dtValidade | date:"dd/MM/YYYY"}}</td>
       <td>{{ sorv.fabricante.nome }}</td>
       <td>
-        <a class="btn btn-primary" style="margin-right: 2px" (click)="edit(sorv.id)">Editar</a>
-        <button class="btn btn-danger" (click)="modalDelete(sorv)">Excluir</button>
-      </td>
+        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+          <mat-icon>menu</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="edit(sorv.id)">
+            <mat-icon>info</mat-icon>
+            <span>Editar</span>
+          </button>
+          <button mat-menu-item (click)="modalDelete(sorv)">
+              <mat-icon>delete</mat-icon>
+              <span>Excluir</span>
+            </button>
+        </mat-menu>
     </tr>
   </tbody>
 </table>

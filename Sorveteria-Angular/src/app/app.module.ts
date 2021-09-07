@@ -23,6 +23,9 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import { AlertModalComponent } from './shared/alert-modal/alert-modal.component';
+import { ListarSaboresComponent } from './sabores/listar-sabores/listar-sabores.component';
+import {MatMenuModule} from '@angular/material/menu';
+import { ModalFormComponent } from './shared/modal-form/modal-form.component';
 
 
 
@@ -39,6 +42,8 @@ import { AlertModalComponent } from './shared/alert-modal/alert-modal.component'
     ModalComponent,
     HomeComponent,
     AlertModalComponent,
+    ListarSaboresComponent,
+    ModalFormComponent,
     
   ],
   imports: [
@@ -54,6 +59,7 @@ import { AlertModalComponent } from './shared/alert-modal/alert-modal.component'
     MatNativeDateModule,
     MatButtonModule,
     MatIconModule,
+    MatMenuModule,
     BsDatepickerModule.forRoot(),
   ],
   providers: [BsModalService,

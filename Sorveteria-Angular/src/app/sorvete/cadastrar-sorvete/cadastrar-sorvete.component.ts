@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Fabricante } from 'src/app/fabricante/fabricante.model';
 import { FabricanteService } from 'src/app/fabricante/fabricante.service';
@@ -60,7 +60,7 @@ export class CadastrarSorveteComponent implements OnInit {
       valorFabrica : [sorvete.valorFabrica, [Validators.required]],
       dtCompra : [sorvete.dtCompra, [Validators.required]],
       dtValidade : [sorvete.dtValidade, [Validators.required]],
-      fabricante : [sorvete.fabricante, [Validators.required]]
+      fabricante : [sorvete.fabricante, [Validators.required]],
     })
   }
 
@@ -115,5 +115,8 @@ export class CadastrarSorveteComponent implements OnInit {
 
   compararFabricante(obj1 : any, obj2 : any) {
     return obj1 && obj2 ? (obj1.id === obj2.id) : obj1 && obj2;
+  }
+  teste(){
+    this.modalService.testeModal();
   }
 }

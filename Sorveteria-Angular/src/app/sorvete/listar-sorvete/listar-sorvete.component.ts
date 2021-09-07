@@ -37,7 +37,7 @@ export class ListarSorveteComponent implements OnInit {
   }
 
   modalDelete(sorvete : Sorvete) {
-    const result$ = this.modalService.showConfirm("Confirmar exclusão", "Deseja excluir o sorvete?", "Confirmar", "Excluir", "danger");
+    const result$ = this.modalService.showConfirm("Confirmar exclusão", "Deseja excluir o sorvete?", "Confirmar", "Cancelar", "danger");
     result$.asObservable().pipe(
       take(1),
       switchMap(result => result ? this.sorveteService.deleteSorvete(sorvete.id) : EMPTY)

@@ -1,0 +1,30 @@
+<h2 class="text-center text-center">Sabores </h2>
+
+<table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Sabor</th>
+        <th>Opções</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let sab of sabores">
+        <td>{{sab.nome | titlecase}}</td>
+        <td>
+            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                <mat-icon>menu</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item>
+                  <mat-icon>info</mat-icon>
+                  <span>Editar</span>
+                </button>
+                <button mat-menu-item>
+                    <mat-icon>delete</mat-icon>
+                    <span>Excluir</span>
+                  </button>
+              </mat-menu>
+        </td>
+      </tr>
+    </tbody>
+  </table>
