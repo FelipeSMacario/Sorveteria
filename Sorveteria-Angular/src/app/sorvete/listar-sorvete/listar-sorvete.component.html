@@ -24,7 +24,6 @@
   <thead>
     <tr>
       <th>Nome</th>
-      <th>Sabor</th>
       <th>Valor</th>
       <th>Valor de Fábrica</th>
       <th>Data da Compra</th>
@@ -33,15 +32,14 @@
       <th>Opções</th>
     </tr>
   </thead>
-  <tbody>
+  <tbody >
     <tr *ngFor="let sorv of sorvete">
       <td>{{ sorv.nome | titlecase}}</td>
-      <td>{{ sorv.sabor | titlecase}}</td>
       <td>{{ sorv.valor | currency:"R$ " }}</td>
       <td>{{ sorv.valorFabrica | currency:"R$ "}}</td>
       <td>{{ sorv.dtCompra | date:"dd/MM/YYYY" }}</td>
       <td>{{ sorv.dtValidade | date:"dd/MM/YYYY"}}</td>
-      <td>{{ sorv.fabricante.nome }}</td>
+      <td >{{ sorv.fabricante.nome }}</td>
       <td>
         <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
           <mat-icon>menu</mat-icon>

@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { EMPTY } from 'rxjs';
+import { switchMap, take } from 'rxjs/operators';
+import { ModalService } from 'src/app/shared/modal/modal.service';
 import { Sabores } from '../sabores.model';
 import { SaboresService } from '../sabores.service';
 
@@ -11,9 +15,12 @@ import { SaboresService } from '../sabores.service';
 export class ListarSaboresComponent implements OnInit {
 
   sabores : Sabores[] = [];
+  form : string = "formSabor";
+  formSabor : FormGroup;
 
   constructor(
-    private saboresService : SaboresService
+    private saboresService : SaboresService,
+    private modalService : ModalService
   ) { }
 
   ngOnInit(): void {
@@ -28,4 +35,19 @@ export class ListarSaboresComponent implements OnInit {
     })
   }
 
+  criarSabor() {
+    this.modalService.testeModal(this.form);
+  }
+
+  modalDelete(sab : Sabores){
+    const result$ = this.modalService.showConfirm("Confirma exclusão", "Deseja excluir permanentemente o sabor?", "Confirmar", "Cancelar", "danger" );
+    result$.asObservable().pipe(
+      take(1),
+      switchMap(result => result ? this.saboresService.deleteSabores(sab.id) : EMPTY)
+    ).subscribe(
+      sucess => {this.modalService.handleMessage("Sorvete excluído com sucesso", "success"); this.findAllSabores()},
+      error => this.modalService.handleMessage("Erro ao excluir o sorvete, tente novamente mais tarde", "danger")
+      )
+  
+    }
 }

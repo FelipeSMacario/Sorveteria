@@ -39,7 +39,9 @@ export class ModalService {
     return (<ModalComponent>bsModalRef.content).confirmResult;
   }
 
-  testeModal(){
+  testeModal(formName : string){
     const bsModalRef : BsModalRef = this.modalService.show(ModalFormComponent);
+
+    bsModalRef.content.formName = formName;
   }
 }

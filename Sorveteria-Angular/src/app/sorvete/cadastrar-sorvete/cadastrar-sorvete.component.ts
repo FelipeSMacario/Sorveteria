@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Fabricante } from 'src/app/fabricante/fabricante.model';
 import { FabricanteService } from 'src/app/fabricante/fabricante.service';
+import { Sabores } from 'src/app/sabores/sabores.model';
+import { SaboresService } from 'src/app/sabores/sabores.service';
 import { ModalService } from 'src/app/shared/modal/modal.service';
 import { Sorvete } from '../sorvete.model';
 import { SorveteService } from '../sorvete.service';
@@ -14,6 +16,7 @@ import { SorveteService } from '../sorvete.service';
 })
 export class CadastrarSorveteComponent implements OnInit {
   fabricante : Fabricante[] = [];
+  sabores : Sabores[] = [];
   cadastro: FormGroup;
   id : number;
 
@@ -22,12 +25,14 @@ export class CadastrarSorveteComponent implements OnInit {
     private sorveteService: SorveteService,
     private activatedRoute: ActivatedRoute,
     private fabricanteService : FabricanteService,
-    private modalService : ModalService 
+    private modalService : ModalService,
+    private saboresService : SaboresService 
   ) {}
 
   ngOnInit(): void {
 
     this.findAllFabricantes();
+    this.findAllSabores();
 
     this.id = this.activatedRoute.snapshot.params["id"];
     
@@ -42,7 +47,7 @@ export class CadastrarSorveteComponent implements OnInit {
     this.cadastro = this.fb.group({
       id: [null],
       nome: [null, [Validators.required]],
-      sabor: [null, [Validators.required]],
+      sabores: this.fb.array([]),
       valor :  [null, [Validators.required]],
       valorFabrica :  [null, [Validators.required]],
       dtCompra :  [null, [Validators.required]],
@@ -53,10 +58,10 @@ export class CadastrarSorveteComponent implements OnInit {
 
   criarFormulario(sorvete : Sorvete) : void {
     this.cadastro = this.fb.group({
-      id : [sorvete.id,],
+      id : [sorvete.id],
       nome : [sorvete.nome,[Validators.required]],
-      sabor : [sorvete.sabor, [Validators.required]],
-      valor : [sorvete.valor, [Validators.required]],
+      sabores : [sorvete.sabores, [Validators.required]],
+      valor : [sorvete.valor, [Validators.required]], 
       valorFabrica : [sorvete.valorFabrica, [Validators.required]],
       dtCompra : [sorvete.dtCompra, [Validators.required]],
       dtValidade : [sorvete.dtValidade, [Validators.required]],
@@ -68,13 +73,17 @@ export class CadastrarSorveteComponent implements OnInit {
     return {
       id: null,
       nome: null,
-      sabor: null,
+      sabores: null,
       valor : null,
       valorFabrica : null,
       dtCompra : null,
       dtValidade : null,
       fabricante: null
     } as unknown as Sorvete
+  }
+
+  get arraySabores(){
+    return this.cadastro.controls.sabores as FormArray;
   }
 
   findAllFabricantes(): void {
@@ -88,7 +97,7 @@ export class CadastrarSorveteComponent implements OnInit {
     this.cadastro.patchValue({
       id: sorvete.id,
       nome: sorvete.nome,
-      sabor: sorvete.sabor,
+      sabor: sorvete.sabores,
       valorFabrica : sorvete.valorFabrica,
       dtCompra : sorvete.dtCompra,
       dtValidade : sorvete.dtValidade,
@@ -101,6 +110,11 @@ export class CadastrarSorveteComponent implements OnInit {
   }
 
   saveSorvete(): void {
+    this.cadastro.value.sabores = this.cadastro.value.sabores
+      .map((checked, i) => checked ? this.sabores[i] : null)
+      .filter(v => v !== null);  
+
+
     this.sorveteService.saveSorvete(this.cadastro.value).subscribe({
       next: (sorvete) => {
         this.modalService.handleMessage("Sorvete cadastrado com sucesso", "success");
@@ -116,7 +130,12 @@ export class CadastrarSorveteComponent implements OnInit {
   compararFabricante(obj1 : any, obj2 : any) {
     return obj1 && obj2 ? (obj1.id === obj2.id) : obj1 && obj2;
   }
-  teste(){
-    this.modalService.testeModal();
+
+  findAllSabores() : void {
+    this.saboresService.findAllSabores().subscribe({
+      next : sab => {this.sabores = sab; this.sabores.forEach(() => this.arraySabores.push(new FormControl(false)))},
+      error : err => console.log("Erro", err)
+    })
   }
+
 }

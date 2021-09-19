@@ -1,6 +1,6 @@
 <div class="modal-content">
     <div class="modal-header">
-      <h2 class="modal-title">Sabores</h2>
+      <h2 class="modal-title titulo">Novo Sabor</h2>
       <button
         type="button"
         class="btn-close"
@@ -9,16 +9,17 @@
         (click)="onClose()"
       ></button>
     </div>
-    <div *ngFor="let sab of sabores">
-      <input type="checkbox" 
-        class="form-check-input" 
-        name="{{sab.nome}}" >
-      <label class="form-check-label" for="exampleCheck1">{{sab.nome | titlecase}}</label>
+    
+    <form class="form-group row" [formGroup]="modal">
+      <label class="col-sm-2 col-form-label sabor">Sabor</label>
+      <div class="col-sm-9">
+        <input class="form-control" formControlName=nome type="text" placeholder="Novo sabor">
     </div>
+    </form>
       
 
     <div class="modal-footer">
-      <button type="button" class="btn btn-success" data-bs-dismiss="modal">
+      <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="salvar()">
         Adicionar
       </button>
       <button

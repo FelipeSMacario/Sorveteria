@@ -5,6 +5,8 @@ import { FabricanteComponent } from './fabricante/listar-fabricante/fabricante.c
 import { ListarSaboresComponent } from './sabores/listar-sabores/listar-sabores.component';
 import { CadastrarSorveteComponent } from './sorvete/cadastrar-sorvete/cadastrar-sorvete.component';
 import { ListarSorveteComponent } from './sorvete/listar-sorvete/listar-sorvete.component';
+import { TesteComponent } from './teste/teste.component';
+import { Teste2Component } from './teste2/teste2.component';
 
 const routes: Routes = [
   {
@@ -37,6 +39,14 @@ const routes: Routes = [
   {
     path : "sabores",
     component : ListarSaboresComponent
+  },
+  {
+    path : "teste",
+    component : TesteComponent
+  },
+  {
+    path : "teste2",
+    component : Teste2Component
   }
 ];
 

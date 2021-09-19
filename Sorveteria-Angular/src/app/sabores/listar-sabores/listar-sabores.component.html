@@ -1,5 +1,15 @@
 <h2 class="text-center text-center">Sabores </h2>
 
+<div class="form-group row">
+  <label class="col-sm-2 col-form-label" style="font-weight: bold; font-size:25px;">Buscar:</label>
+  
+  <div class="col-sm-9">
+      <input class="form-control">
+  </div>
+  <div class="col-sm-1">
+      <a class="btn btn-success" style="width: 82px; height: 38px;" (click)="criarSabor()">Criar</a>
+  </div>
+
 <table class="table table-bordered">
     <thead>
       <tr>
@@ -19,7 +29,7 @@
                   <mat-icon>info</mat-icon>
                   <span>Editar</span>
                 </button>
-                <button mat-menu-item>
+                <button mat-menu-item (click)="modalDelete(sab)">
                     <mat-icon>delete</mat-icon>
                     <span>Excluir</span>
                   </button>

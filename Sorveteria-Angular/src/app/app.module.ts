@@ -26,6 +26,9 @@ import { AlertModalComponent } from './shared/alert-modal/alert-modal.component'
 import { ListarSaboresComponent } from './sabores/listar-sabores/listar-sabores.component';
 import {MatMenuModule} from '@angular/material/menu';
 import { ModalFormComponent } from './shared/modal-form/modal-form.component';
+import { TabsModule } from 'ngx-bootstrap/tabs';
+import { TesteComponent } from './teste/teste.component';
+import { Teste2Component } from './teste2/teste2.component';
 
 
 
@@ -44,6 +47,8 @@ import { ModalFormComponent } from './shared/modal-form/modal-form.component';
     AlertModalComponent,
     ListarSaboresComponent,
     ModalFormComponent,
+    TesteComponent,
+    Teste2Component,
     
   ],
   imports: [
@@ -60,6 +65,7 @@ import { ModalFormComponent } from './shared/modal-form/modal-form.component';
     MatButtonModule,
     MatIconModule,
     MatMenuModule,
+    TabsModule,
     BsDatepickerModule.forRoot(),
   ],
   providers: [BsModalService,

@@ -1,0 +1,7 @@
+<form [formGroup]="form" (ngSubmit)="submit()">
+    <label formArrayName="sabores" *ngFor="let order of saboresArray.controls; let i = index">
+      <input type="checkbox" [formControlName]="i">
+      {{sabor[i].nome}}
+    </label>
+    <button>submit</button>
+  </form>

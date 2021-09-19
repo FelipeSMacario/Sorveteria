@@ -1,9 +1,10 @@
 import { Fabricante } from "../fabricante/fabricante.model";
+import { Sabores } from "../sabores/sabores.model";
 
 export class Sorvete {
     id : number;
     nome : string ;
-    sabor : string;
+    sabores : Array<Sabores>;
     valor : number;
     valorFabrica : number;
     dtCompra : Date;

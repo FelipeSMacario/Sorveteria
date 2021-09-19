@@ -1,127 +1,132 @@
 <h2 class="text-center text-center">Cadastro de Sorvete</h2>
 
-<hr />
-
 <form [formGroup]="cadastro" (ngSubmit)="saveSorvete()">
-  <div class="form-group row">
-    <label class="col-sm-2 col-form-label">Nome</label>
-    <div class="col-sm-10">
-      <input
-        class="form-control"
-        formControlName="nome"
-        type="text"
-        placeholder="Nome do sorvete"
-      />
-    </div>
+  <div>
+    <tabset>
+      <tab heading="Cadastro" id="tab1">
+        <br>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Nome</label>
+          <div class="col-sm-10">
+            <input
+              class="form-control"
+              formControlName="nome"
+              type="text"
+              placeholder="Nome do sorvete"
+            />
+          </div>
+        </div>      
+      
+        <br />
+      
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Valor de Venda</label>
+          <div class="col-sm-10">
+            <input
+              class="form-control"
+              formControlName="valor"
+              type="number"
+              placeholder="Valor de venda do sorvete"
+            />
+          </div>
+        </div>
+        <br />
+      
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Valor de Fábrica</label>
+          <div class="col-sm-10">
+            <input
+              class="form-control"
+              formControlName="valorFabrica"
+              type="number"
+              placeholder="Valor de fábrica do sorvete"
+            />
+          </div>
+        </div>
+      
+        <br />
+      
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Data da Compra </label>
+          <div class="col-sm-10">
+            <mat-form-field appearance="fill">
+              <mat-label>Compra</mat-label>
+              <input
+                readonly
+                matInput
+                [matDatepicker]="picker"
+                formControlName="dtCompra"
+                (click)="picker.open()"
+              />
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </div>
+        </div>
+      
+        <br />
+      
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Data da Validade </label>
+          <div class="col-sm-10">
+            <mat-form-field appearance="fill">
+              <mat-label>Validade</mat-label>
+              <input
+                readonly
+                matInput
+                [matDatepicker]="picker1"
+                formControlName="dtValidade"
+                (click)="picker1.open()"
+              />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="picker1"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>
+          </div>
+        </div>
+      
+        <br />
+      
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Fabricante</label>
+          <div class="col-sm-10">
+            <select
+              class="form-control"
+              aria-label="Default select example"
+              formControlName="fabricante"
+              [compareWith]="compararFabricante"
+            >
+              <option value="null" disabled selected>Selecione um fabricante</option>
+              <option *ngFor="let fabri of fabricante" [ngValue]="fabri">
+                {{ fabri.nome }}
+              </option>
+            </select>
+          </div>
+        </div>
+      
+      </tab>
+      <br>
+      <tab heading="Sabores">
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Sabor</label>
+          <div class="col-sm-10" id="frameworks">      
+            <div formArrayName="sabores" class="form-check child" *ngFor="let sab of arraySabores.controls; let i = index">
+              <label class="form-check-label" >
+                {{sabores[i].nome}}
+              </label>
+              <input class="form-check-input" type="checkbox" [formControlName]="i" >
+              
+            </div>
+      
+      
+          </div>
+        </div>
+      </tab>
+    </tabset>
   </div>
-
-  <br />
-  <div class="form-group row">
-    <label class="col-sm-2 col-form-label">Sabor</label>
-    <div class="col-sm-9">
-      <input
-        class="form-control"
-        formControlName="sabor"
-        type="text"
-        placeholder="Sabor do sorvete"
-      />
-    </div>
-    <div class="col-sm-1">
-      <button type="button" mat-mini-fab color="success" aria-label="Example icon button with a plus one icon" (click)="teste()">
-        <mat-icon>add icon</mat-icon>
-      </button>
-    </div>
-  </div>
-
-  <br />
-
-  <div class="form-group row">
-    <label class="col-sm-2 col-form-label">Valor de Venda</label>
-    <div class="col-sm-10">
-      <input
-        class="form-control"
-        formControlName="valor"
-        type="number"
-        placeholder="Valor de venda do sorvete"
-      />
-    </div>
-  </div>
-  <br />
-
-  <div class="form-group row">
-    <label class="col-sm-2 col-form-label">Valor de Fábrica</label>
-    <div class="col-sm-10">
-      <input
-        class="form-control"
-        formControlName="valorFabrica"
-        type="number"
-        placeholder="Valor de fábrica do sorvete"
-      />
-    </div>
-  </div>
-
-  <br />
-
-  <div class="form-group row">
-    <label class="col-sm-2 col-form-label">Data da Compra </label>
-    <div class="col-sm-10">
-      <mat-form-field appearance="fill">
-        <mat-label>Compra</mat-label>
-        <input
-          readonly
-          matInput
-          [matDatepicker]="picker"
-          formControlName="dtCompra"
-          (click)="picker.open()"
-        />
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field>
-    </div>
-  </div>
-
-  <br />
-
-  <div class="form-group row">
-    <label class="col-sm-2 col-form-label">Data da Validade </label>
-    <div class="col-sm-10">
-      <mat-form-field appearance="fill">
-        <mat-label>Validade</mat-label>
-        <input
-          readonly
-          matInput
-          [matDatepicker]="picker1"
-          formControlName="dtValidade"
-          (click)="picker1.open()"
-        />
-        <mat-datepicker-toggle
-          matSuffix
-          [for]="picker1"
-        ></mat-datepicker-toggle>
-        <mat-datepicker #picker1></mat-datepicker>
-      </mat-form-field>
-    </div>
-  </div>
-
-  <br />
-
-  <div class="form-group row">
-    <label class="col-sm-2 col-form-label">Fabricante</label>
-    <div class="col-sm-10">
-      <select
-        class="form-control"
-        aria-label="Default select example"
-        formControlName="fabricante"
-        [compareWith]="compararFabricante"
-      >
-        <option value="null" disabled selected>Selecione um fabricante</option>
-        <option *ngFor="let fabri of fabricante" [ngValue]="fabri">
-          {{ fabri.nome }}
-        </option>
-      </select>
-    </div>
-  </div>
-
+ 
   <br>  
  
   <div class="text-center">
@@ -133,3 +138,8 @@
     </button>
   </div>
 </form>
+
+
+
+
+

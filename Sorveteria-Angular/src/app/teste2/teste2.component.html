@@ -1,0 +1,36 @@
+<h2 class="text-center text-center">Cadastro de Sorvete</h2>
+
+<form [formGroup]="form" >
+  <label>Nome</label>
+  <input type="text" formControlName="nome">
+
+  <br>
+  <br>
+
+  <label>valorFabrica</label>
+  <input type="number" formControlName="valorFabrica">
+
+  <br>
+  <br>
+
+  <label>Sabores</label>
+
+  <br>
+  <br>
+
+  <div class="checkbox">
+    <label formArrayName="sabores" *ngFor="let sab of arraySabor.controls; let i = index">
+        {{sabor[i].nome}}
+        <input type="checkbox" [formControlName]="i">
+    </label>
+  </div>
+
+  <button class="btn btn-danger" (click)="submit()">P</button>
+
+  <button class="btn btn-success" (click)="saveSorvete()">Salvar</button>
+</form>
+
+
+
+
+
