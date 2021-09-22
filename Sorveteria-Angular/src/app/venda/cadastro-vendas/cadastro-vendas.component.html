@@ -7,10 +7,25 @@
       <select class="form-control" 
       aria-label="Default select example"
       formControlName="sorvete"
-      (change)="ngOnChange()">
-        <option value="null" disabled selected>Selecione um sorvete</option>
+      (change)="ngOnChange(); atualizaSabor(cadastro.value.sorvete.sabores)">
+        <option value="null" disabled selected>Selecione um sabor</option>
         <option *ngFor="let sorv of sorvetes" [ngValue]="sorv" >
           {{ sorv.nome }}
+        </option>
+      </select>
+    </div>
+  </div>
+<br>
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label">Sabor</label>
+    <div class="col-sm-10">
+      <select class="form-control" 
+      aria-label="Default select example"
+      formControlName="sabores"
+      >
+        <option value="null" disabled selected>Selecione um sorvete</option>
+        <option *ngFor="let sab of sabores" [ngValue]="sab" >
+          {{ sab.nome }}
         </option>
       </select>
     </div>

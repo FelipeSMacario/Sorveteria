@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Sabores } from 'src/app/sabores/sabores.model';
 import { Sorvete } from 'src/app/sorvete/sorvete.model';
 import { SorveteService } from 'src/app/sorvete/sorvete.service';
 import { VendaService } from '../venda.service';
@@ -11,9 +12,8 @@ import { VendaService } from '../venda.service';
 })
 export class VendaCadastroComponent implements OnInit {
   cadastro: FormGroup;
-  preco: number;
-
-  sorvetes: Sorvete[] = [];
+  sorvetes: Sorvete[];
+  sabores : Sabores[] = []
 
   constructor(
     private sorveteService: SorveteService,
@@ -26,6 +26,7 @@ export class VendaCadastroComponent implements OnInit {
 
     this.cadastro = this.fb.group({
       sorvete: [null, [Validators.required]],
+      sabores: [null, [Validators.required]],
       qtdItemVenda: [null, [Validators.required]],
       qtdValorVenda: [null, [Validators.required]],
     });
@@ -59,5 +60,13 @@ export class VendaCadastroComponent implements OnInit {
       next : (vendas) => {console.log("Cadastrado com sucesso", vendas); this.cadastro.reset()},
       error : err => console.log("ERRO", err)
     })
+  }
+
+  atualizaSabor(id ){
+    this.cadastro.controls.sabores.setValue(null);
+    this.sabores = [];
+    let valor = id;
+    valor.forEach(v => this.sabores.push(v))
+
   }
 }
