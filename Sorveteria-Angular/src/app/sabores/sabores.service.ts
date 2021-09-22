@@ -15,6 +15,10 @@ export class SaboresService {
     return this.httpCliente.get<Sabores[]>(`${this.urlSabor}`);
   }
 
+  findSaboresById(id : number) : Observable<Sabores> {
+    return this.httpCliente.get<Sabores>(`${this.urlSabor}/${id}`)
+  }
+
   createSabores(sabores: Sabores): Observable<Sabores> {
     return this.httpCliente.post<Sabores>(`${this.urlSabor}`, sabores);
   }

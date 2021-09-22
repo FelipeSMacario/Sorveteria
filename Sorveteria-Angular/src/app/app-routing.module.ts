@@ -5,8 +5,8 @@ import { FabricanteComponent } from './fabricante/listar-fabricante/fabricante.c
 import { ListarSaboresComponent } from './sabores/listar-sabores/listar-sabores.component';
 import { CadastrarSorveteComponent } from './sorvete/cadastrar-sorvete/cadastrar-sorvete.component';
 import { ListarSorveteComponent } from './sorvete/listar-sorvete/listar-sorvete.component';
-import { TesteComponent } from './teste/teste.component';
-import { Teste2Component } from './teste2/teste2.component';
+import { VendaCadastroComponent } from './venda/cadastro-vendas/cadastro-vendas.component';
+import { ListarVendasComponent } from './venda/listar-vendas/listar-vendas.component';
 
 const routes: Routes = [
   {
@@ -41,12 +41,16 @@ const routes: Routes = [
     component : ListarSaboresComponent
   },
   {
-    path : "teste",
-    component : TesteComponent
+    path : "vendas",
+    component : ListarVendasComponent
   },
   {
-    path : "teste2",
-    component : Teste2Component
+    path : "vendas/novo",
+    component : VendaCadastroComponent
+  },
+  {
+    path : "vendas/novo/:id",
+    component : VendaCadastroComponent
   }
 ];
 

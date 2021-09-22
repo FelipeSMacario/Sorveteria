@@ -27,8 +27,8 @@ import { ListarSaboresComponent } from './sabores/listar-sabores/listar-sabores.
 import {MatMenuModule} from '@angular/material/menu';
 import { ModalFormComponent } from './shared/modal-form/modal-form.component';
 import { TabsModule } from 'ngx-bootstrap/tabs';
-import { TesteComponent } from './teste/teste.component';
-import { Teste2Component } from './teste2/teste2.component';
+import { VendaCadastroComponent } from './venda/cadastro-vendas/cadastro-vendas.component';
+import { ListarVendasComponent } from './venda/listar-vendas/listar-vendas.component';
 
 
 
@@ -47,8 +47,8 @@ import { Teste2Component } from './teste2/teste2.component';
     AlertModalComponent,
     ListarSaboresComponent,
     ModalFormComponent,
-    TesteComponent,
-    Teste2Component,
+    VendaCadastroComponent,
+    ListarVendasComponent,
     
   ],
   imports: [
@@ -73,6 +73,7 @@ import { Teste2Component } from './teste2/teste2.component';
               BsModalRef, 
               MatNativeDateModule, 
               MatDatepickerModule, 
+              ModalFormComponent,             
               { provide: MAT_DATE_LOCALE, useValue: 'pt' }
               ],
   bootstrap: [AppComponent]

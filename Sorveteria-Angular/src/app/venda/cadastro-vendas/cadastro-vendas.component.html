@@ -1,0 +1,57 @@
+<h2 class="text-center text-center">Cadastro de Vendas</h2>
+
+<form [formGroup]="cadastro" (ngSubmit)="saveVendas()">
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label">Sorvete</label>
+    <div class="col-sm-10">
+      <select class="form-control" 
+      aria-label="Default select example"
+      formControlName="sorvete"
+      (change)="ngOnChange()">
+        <option value="null" disabled selected>Selecione um sorvete</option>
+        <option *ngFor="let sorv of sorvetes" [ngValue]="sorv" >
+          {{ sorv.nome }}
+        </option>
+      </select>
+    </div>
+  </div>
+
+  <br />
+
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label">Quantidade</label>
+    <div class="col-sm-10">
+      <input
+        class="form-control"
+        formControlName="qtdItemVenda"
+        type="number"
+        placeholder="Quantidade de sorvetes"
+        (change)="ngOnChange()"
+      />
+    </div>
+  </div>
+  <br />
+  
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label">Valor Total</label>
+    <div class="col-sm-10">
+      <input
+        readonly
+        class="form-control"       
+        formControlName="qtdValorVenda"
+        type="number"
+        placeholder="Valor Total"
+      />
+    </div>
+  </div>
+  <br />
+
+  <div class="text-center">
+    <button class="btn btn-primary" style="margin-right: 8px" type="submit">
+      Salvar
+    </button>
+    <button class="btn btn-secondary" type="button" [routerLink]="['/vendas']">
+      Voltar
+    </button>
+  </div>
+</form>

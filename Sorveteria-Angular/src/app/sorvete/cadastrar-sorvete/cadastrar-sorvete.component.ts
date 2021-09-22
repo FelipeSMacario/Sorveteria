@@ -34,16 +34,45 @@ export class CadastrarSorveteComponent implements OnInit {
     this.findAllFabricantes();
     this.findAllSabores();
 
+    
+
     this.id = this.activatedRoute.snapshot.params["id"];
     
     if(this.id) {
       this.sorveteService.findSorveteById(this.id).subscribe((sorvete : Sorvete) => this.criarFormulario(sorvete));
     }
     else {
-      this.criarFormulario(this.formularioVazio());
+      this.formularioVazio();
     }
    
 
+    this.cadastro = this.fb.group({
+      id: [null],
+      nome: [null, [Validators.required]],
+      sabores: this.fb.array([]),
+      valor :  [null, [Validators.required]],
+      valorFabrica :  [null, [Validators.required]],
+      dtCompra :  [null, [Validators.required]],
+      dtValidade :  [null, [Validators.required]],
+      fabricante : [null, [Validators.required]],
+      
+    });
+  }
+
+  criarFormulario(sorvete : Sorvete) : void {
+    this.cadastro = this.fb.group({
+      id : [sorvete.id],
+      nome : [sorvete.nome,[Validators.required]],
+      sabores : this.arraySabores,
+      valor : [sorvete.valor, [Validators.required]], 
+      valorFabrica : [sorvete.valorFabrica, [Validators.required]],
+      dtCompra : [sorvete.dtCompra, [Validators.required]],
+      dtValidade : [sorvete.dtValidade, [Validators.required]],
+      fabricante : [sorvete.fabricante, [Validators.required]],
+    }) 
+  }
+
+  formularioVazio() {
     this.cadastro = this.fb.group({
       id: [null],
       nome: [null, [Validators.required]],
@@ -56,32 +85,6 @@ export class CadastrarSorveteComponent implements OnInit {
     });
   }
 
-  criarFormulario(sorvete : Sorvete) : void {
-    this.cadastro = this.fb.group({
-      id : [sorvete.id],
-      nome : [sorvete.nome,[Validators.required]],
-      sabores : [sorvete.sabores, [Validators.required]],
-      valor : [sorvete.valor, [Validators.required]], 
-      valorFabrica : [sorvete.valorFabrica, [Validators.required]],
-      dtCompra : [sorvete.dtCompra, [Validators.required]],
-      dtValidade : [sorvete.dtValidade, [Validators.required]],
-      fabricante : [sorvete.fabricante, [Validators.required]],
-    })
-  }
-
-  formularioVazio() : Sorvete {
-    return {
-      id: null,
-      nome: null,
-      sabores: null,
-      valor : null,
-      valorFabrica : null,
-      dtCompra : null,
-      dtValidade : null,
-      fabricante: null
-    } as unknown as Sorvete
-  }
-
   get arraySabores(){
     return this.cadastro.controls.sabores as FormArray;
   }
@@ -91,22 +94,6 @@ export class CadastrarSorveteComponent implements OnInit {
       next: (fabri) => (this.fabricante = fabri),
       error: (err) => console.log('Erro', err),
     });
-  }
-
-  updateForm(sorvete: Sorvete) {
-    this.cadastro.patchValue({
-      id: sorvete.id,
-      nome: sorvete.nome,
-      sabor: sorvete.sabores,
-      valorFabrica : sorvete.valorFabrica,
-      dtCompra : sorvete.dtCompra,
-      dtValidade : sorvete.dtValidade,
-      fabricante: sorvete.fabricante,
-    }); 
-  }
-
-  findSorveteById(id: number) {
-    this.sorveteService.findSorveteById(id).subscribe();
   }
 
   saveSorvete(): void {
@@ -133,9 +120,18 @@ export class CadastrarSorveteComponent implements OnInit {
 
   findAllSabores() : void {
     this.saboresService.findAllSabores().subscribe({
-      next : sab => {this.sabores = sab; this.sabores.forEach(() => this.arraySabores.push(new FormControl(false)))},
+      next : sab => {this.sabores = sab; 
+                    this.sabores.forEach(() => this.arraySabores.push(new FormControl(false)))},
       error : err => console.log("Erro", err)
     })
   }
+  teste(){
+    console.log(this.cadastro.value);     
+    console.log(this.arraySabores.value[1]);     
+    
+     
+  }
 
+
+  
 }

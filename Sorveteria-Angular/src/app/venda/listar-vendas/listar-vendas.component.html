@@ -1,4 +1,4 @@
-<h2 class="text-center text-center">Sabores </h2>
+<h2 class="text-center text-center">Vendas </h2>
 
 <div class="form-group row">
   <label class="col-sm-2 col-form-label" style="font-weight: bold; font-size:25px;">Buscar:</label>
@@ -7,19 +7,25 @@
       <input class="form-control">
   </div>
   <div class="col-sm-1">
-      <a class="btn btn-success" style="width: 82px; height: 38px;" (click)="criarSabor()">Criar</a>
+      <a class="btn btn-success" style="width: 82px; height: 38px;" [routerLink]="['novo']" >Criar</a>
   </div>
 
 <table class="table table-bordered">
     <thead>
-      <tr>
-        <th>Sabor</th>
+      <tr >
+        <th>Nome</th>
+        <th>Quantidade</th>
+        <th>Valor Unidade</th>
+        <th>Valor Total</th>
         <th>Opções</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let sab of sabores">
-        <td>{{sab.nome | titlecase}}</td>
+      <tr *ngFor="let vend of vendas">
+        <td>{{vend.sorvete.nome}}</td>
+        <td>{{vend.qtdItemVenda}}</td>
+        <td>{{vend.sorvete.valor | currency:"R$ "}}</td>
+        <td>{{vend.qtdValorVenda | currency:"R$ "}}</td>
         <td>
             <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
                 <mat-icon>menu</mat-icon>
@@ -27,9 +33,9 @@
               <mat-menu #menu="matMenu">
                 <button mat-menu-item>
                   <mat-icon>info</mat-icon>
-                  <span (click)="editSabor(sab.id)">Editar</span>
+                  <span >Editar</span>
                 </button>
-                <button mat-menu-item (click)="modalDelete(sab)">
+                <button mat-menu-item >
                     <mat-icon>delete</mat-icon>
                     <span>Excluir</span>
                   </button>

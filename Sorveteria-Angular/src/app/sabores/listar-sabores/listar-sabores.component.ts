@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { EMPTY } from 'rxjs';
 import { switchMap, take } from 'rxjs/operators';
+import { ModalFormComponent } from 'src/app/shared/modal-form/modal-form.component';
 import { ModalService } from 'src/app/shared/modal/modal.service';
 import { Sabores } from '../sabores.model';
 import { SaboresService } from '../sabores.service';
@@ -17,15 +18,20 @@ export class ListarSaboresComponent implements OnInit {
   sabores : Sabores[] = [];
   form : string = "formSabor";
   formSabor : FormGroup;
+  teste : number;
+  
 
   constructor(
     private saboresService : SaboresService,
-    private modalService : ModalService
+    private modalService : ModalService,
   ) { }
 
   ngOnInit(): void {
-    this.findAllSabores();
-    
+    this.findAllSabores();    
+  }
+
+  editSabor(id : number){
+   
   }
 
   findAllSabores() : void {
@@ -35,8 +41,10 @@ export class ListarSaboresComponent implements OnInit {
     })
   }
 
+
+
   criarSabor() {
-    this.modalService.testeModal(this.form);
+      this.modalService.criarModal(this.form); 
   }
 
   modalDelete(sab : Sabores){

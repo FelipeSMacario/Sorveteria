@@ -11,7 +11,7 @@ export class ModalService {
 
   constructor(
     private modalService : BsModalService,
-    private modal : ModalComponent
+    private modal : ModalFormComponent
   ) { }
 
   handleMessage(message : string, type? : string){
@@ -39,9 +39,13 @@ export class ModalService {
     return (<ModalComponent>bsModalRef.content).confirmResult;
   }
 
-  testeModal(formName : string){
+  criarModal(formName : string, id?: number){
     const bsModalRef : BsModalRef = this.modalService.show(ModalFormComponent);
 
     bsModalRef.content.formName = formName;
+    
+    if(id) {
+      bsModalRef.content.id = id;      
+    }
   }
 }

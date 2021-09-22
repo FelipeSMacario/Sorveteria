@@ -112,15 +112,15 @@
         <div class="form-group row">
           <label class="col-sm-2 col-form-label">Sabor</label>
           <div class="col-sm-10" id="frameworks">      
-            <div formArrayName="sabores" class="form-check child" *ngFor="let sab of arraySabores.controls; let i = index">
+            <div formArrayName="sabores" class="form-check child" *ngFor="let sab of arraySabores.controls; let i = index" >
               <label class="form-check-label" >
                 {{sabores[i].nome}}
-              </label>
-              <input class="form-check-input" type="checkbox" [formControlName]="i" >
+                <input class="form-check-input" type="checkbox" [formControlName]="i" >
+              </label>              
               
             </div>
       
-      
+            <button type="button" (click)="teste()">Teste</button>
           </div>
         </div>
       </tab>
