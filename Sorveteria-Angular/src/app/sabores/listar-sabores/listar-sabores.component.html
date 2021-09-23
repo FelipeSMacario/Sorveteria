@@ -7,7 +7,7 @@
       <input class="form-control">
   </div>
   <div class="col-sm-1">
-      <a class="btn btn-success" style="width: 82px; height: 38px;" (click)="criarSabor()">Criar</a>
+      <a class="btn btn-success" style="width: 82px; height: 38px;" [routerLink]="['novo']">Criar</a>
   </div>
 
 <table class="table table-bordered">
@@ -25,9 +25,9 @@
                 <mat-icon>menu</mat-icon>
               </button>
               <mat-menu #menu="matMenu">
-                <button mat-menu-item>
+                <button mat-menu-item (click)="edit(sab.id)">
                   <mat-icon>info</mat-icon>
-                  <span (click)="editSabor(sab.id)">Editar</span>
+                  <span>Editar</span>
                 </button>
                 <button mat-menu-item (click)="modalDelete(sab)">
                     <mat-icon>delete</mat-icon>

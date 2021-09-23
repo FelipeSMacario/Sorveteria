@@ -19,8 +19,13 @@ export class SaboresService {
     return this.httpCliente.get<Sabores>(`${this.urlSabor}/${id}`)
   }
 
-  createSabores(sabores: Sabores): Observable<Sabores> {
+  saveSabores(sabores: Sabores): Observable<Sabores> {
+    if(sabores.id){
+      return this.httpCliente.put<Sabores>(`${this.urlSabor}/${sabores.id}`, sabores)
+    }
+    else {
     return this.httpCliente.post<Sabores>(`${this.urlSabor}`, sabores);
+    }
   }
 
   deleteSabores(id: number): Observable<any> {

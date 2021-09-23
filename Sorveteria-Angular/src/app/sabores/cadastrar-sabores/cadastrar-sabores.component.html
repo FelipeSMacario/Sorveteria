@@ -1,0 +1,19 @@
+<h2 class="text-center text-center">Cadastro de Sabores</h2>
+
+<hr/>
+
+<form [formGroup]="cadastro" (ngSubmit)="saveFabricante()">
+    
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Nome</label>
+        <div class="col-sm-10">
+            <input class="form-control" formControlName="nome" type="text" placeholder="Nome do sabor">
+        </div>
+    </div>
+    <br>
+    <div class="text-center">
+        <button  class="btn btn-primary" style="margin-right: 8px;" type="submit">Salvar</button>
+        <button  class="btn btn-secondary" type="button" [routerLink]="['/sabores']" >Voltar</button>
+    </div>
+</form>
+

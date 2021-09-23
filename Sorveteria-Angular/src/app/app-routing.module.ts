@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ApagarComponent } from './apagar/apagar.component';
 import { CadastrarFabricanteComponent } from './fabricante/cadastrar-fabricante/cadastrar-fabricante.component';
 import { FabricanteComponent } from './fabricante/listar-fabricante/fabricante.component';
+import { CadastrarSaboresComponent } from './sabores/cadastrar-sabores/cadastrar-sabores.component';
 import { ListarSaboresComponent } from './sabores/listar-sabores/listar-sabores.component';
 import { CadastrarSorveteComponent } from './sorvete/cadastrar-sorvete/cadastrar-sorvete.component';
 import { ListarSorveteComponent } from './sorvete/listar-sorvete/listar-sorvete.component';
@@ -42,6 +42,14 @@ const routes: Routes = [
     component : ListarSaboresComponent
   },
   {
+    path : "sabores/novo",
+    component : CadastrarSaboresComponent
+  },
+  {
+    path : "sabores/novo/:id",
+    component : CadastrarSaboresComponent
+  },
+  {
     path : "vendas",
     component : ListarVendasComponent
   },
@@ -53,10 +61,6 @@ const routes: Routes = [
     path : "vendas/novo/:id",
     component : VendaCadastroComponent
   },
-  {
-    path : "apagar",
-    component : ApagarComponent
-  }
 ];
 
 @NgModule({

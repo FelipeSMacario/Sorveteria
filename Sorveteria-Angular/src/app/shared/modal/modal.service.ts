@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { AlertModalComponent } from '../alert-modal/alert-modal.component';
-import { ModalFormComponent } from '../modal-form/modal-form.component';
 import { ModalComponent } from './modal.component';
 
 @Injectable({
@@ -11,7 +10,6 @@ export class ModalService {
 
   constructor(
     private modalService : BsModalService,
-    private modal : ModalFormComponent
   ) { }
 
   handleMessage(message : string, type? : string){
@@ -37,15 +35,5 @@ export class ModalService {
     bsModalRef.content.type = type;
 
     return (<ModalComponent>bsModalRef.content).confirmResult;
-  }
-
-  criarModal(formName : string, id?: number){
-    const bsModalRef : BsModalRef = this.modalService.show(ModalFormComponent);
-
-    bsModalRef.content.formName = formName;
-    
-    if(id) {
-      bsModalRef.content.id = id;      
-    }
   }
 }

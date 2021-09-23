@@ -25,11 +25,11 @@ import {MatIconModule} from '@angular/material/icon';
 import { AlertModalComponent } from './shared/alert-modal/alert-modal.component';
 import { ListarSaboresComponent } from './sabores/listar-sabores/listar-sabores.component';
 import {MatMenuModule} from '@angular/material/menu';
-import { ModalFormComponent } from './shared/modal-form/modal-form.component';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { VendaCadastroComponent } from './venda/cadastro-vendas/cadastro-vendas.component';
 import { ListarVendasComponent } from './venda/listar-vendas/listar-vendas.component';
-import { ApagarComponent } from './apagar/apagar.component';
+import { CadastrarSaboresComponent } from './sabores/cadastrar-sabores/cadastrar-sabores.component';
+
 
 
 
@@ -47,10 +47,9 @@ import { ApagarComponent } from './apagar/apagar.component';
     HomeComponent,
     AlertModalComponent,
     ListarSaboresComponent,
-    ModalFormComponent,
     VendaCadastroComponent,
     ListarVendasComponent,
-    ApagarComponent,
+    CadastrarSaboresComponent,
     
   ],
   imports: [
@@ -75,7 +74,7 @@ import { ApagarComponent } from './apagar/apagar.component';
               BsModalRef, 
               MatNativeDateModule, 
               MatDatepickerModule, 
-              ModalFormComponent,             
+              ListarSaboresComponent,             
               { provide: MAT_DATE_LOCALE, useValue: 'pt' }
               ],
   bootstrap: [AppComponent]
