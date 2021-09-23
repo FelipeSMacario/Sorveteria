@@ -29,12 +29,8 @@ export class ListarSaboresComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.findAllSabores();  
-    
+    this.findAllSabores();   
   }
-
-
-
   findAllSabores() : void {
     this.saboresService.findAllSabores().subscribe({
       next : sab => this.sabores = sab,

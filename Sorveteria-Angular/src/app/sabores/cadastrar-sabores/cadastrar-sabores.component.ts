@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { ModalService } from 'src/app/shared/modal/modal.service';
 import { Sabores } from '../sabores.model';
 import { SaboresService } from '../sabores.service';
 
@@ -18,7 +19,8 @@ export class CadastrarSaboresComponent implements OnInit {
   constructor(
     private fb : FormBuilder,
     private saboresService : SaboresService,
-    private activedRoute : ActivatedRoute
+    private activedRoute : ActivatedRoute,
+    private modal : ModalService
   ) { }
 
   ngOnInit(): void {
@@ -59,8 +61,16 @@ export class CadastrarSaboresComponent implements OnInit {
 
   saveFabricante(){
     this.saboresService.saveSabores(this.cadastro.value).subscribe({
-      next : sab => console.log("Cadastrado com sucesso!", sab),
-      error : err => console.log(err)
+      next : sab => { this.modal.handleMessage(
+        'Sabor cadastrado com sucesso',
+        'success'
+      );
+        console.log("Cadastrado com sucesso!", sab)},
+      error : err => { this.modal.handleMessage(
+        'Erro ao cadastrar o sorvete',
+        'danger'
+      );
+        console.log(err)}
     })
   }
 

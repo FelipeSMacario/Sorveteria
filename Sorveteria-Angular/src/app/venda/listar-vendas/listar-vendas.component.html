@@ -33,11 +33,11 @@
                 <mat-icon>menu</mat-icon>
               </button>
               <mat-menu #menu="matMenu">
-                <button mat-menu-item>
+                <button mat-menu-item (click)="editVendas(vend.id)">
                   <mat-icon>info</mat-icon>
                   <span >Editar</span>
                 </button>
-                <button mat-menu-item >
+                <button mat-menu-item (click)="modalDelete(vend)">
                     <mat-icon>delete</mat-icon>
                     <span>Excluir</span>
                   </button>

@@ -24,4 +24,12 @@ export class VendaService {
       return this.httpCliente.post<Vendas>(`${this.vendaURL}`, vendas);
     }
   }
+
+  findVendaById(id : number) : Observable<Vendas> {
+    return this.httpCliente.get<Vendas>(`${this.vendaURL}/${id}`);
+  }
+
+  deleteVenda(id : number) : Observable<any> {
+    return this.httpCliente.delete<any>(`${this.vendaURL}/${id}`);
+  }
 }
