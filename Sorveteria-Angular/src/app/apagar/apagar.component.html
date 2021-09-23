@@ -1,0 +1,26 @@
+<br>
+<form>
+    <div class="form-control">
+        <label >Nome</label>
+        <input type="text">
+    </div>
+    <button type="button" class="btn btn-success" (click)="clicou()" >ENVIAR</button>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>NOME</th>
+            <th>OPÇÃO</th>
+        </tr>
+        
+    </thead>
+    <tbody>
+        <tr *ngFor="let val of valor">
+            <td>{{val.id}}</td>
+            <td>{{val.nome}}</td>
+            <td> <button class="btn btn-success">Editar</button> </td>
+        </tr>
+    </tbody>
+</table>

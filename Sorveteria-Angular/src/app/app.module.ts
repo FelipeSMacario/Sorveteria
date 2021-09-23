@@ -29,6 +29,7 @@ import { ModalFormComponent } from './shared/modal-form/modal-form.component';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { VendaCadastroComponent } from './venda/cadastro-vendas/cadastro-vendas.component';
 import { ListarVendasComponent } from './venda/listar-vendas/listar-vendas.component';
+import { ApagarComponent } from './apagar/apagar.component';
 
 
 
@@ -49,6 +50,7 @@ import { ListarVendasComponent } from './venda/listar-vendas/listar-vendas.compo
     ModalFormComponent,
     VendaCadastroComponent,
     ListarVendasComponent,
+    ApagarComponent,
     
   ],
   imports: [
