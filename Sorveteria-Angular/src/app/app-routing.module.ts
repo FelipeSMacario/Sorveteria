@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CadastrarFabricanteComponent } from './fabricante/cadastrar-fabricante/cadastrar-fabricante.component';
 import { FabricanteComponent } from './fabricante/listar-fabricante/fabricante.component';
+import { HomeComponent } from './home/home.component';
 import { CadastrarSaboresComponent } from './sabores/cadastrar-sabores/cadastrar-sabores.component';
 import { ListarSaboresComponent } from './sabores/listar-sabores/listar-sabores.component';
 import { CadastrarSorveteComponent } from './sorvete/cadastrar-sorvete/cadastrar-sorvete.component';
@@ -11,7 +12,11 @@ import { ListarVendasComponent } from './venda/listar-vendas/listar-vendas.compo
 
 const routes: Routes = [
   {
-    path : "", redirectTo: 'fabricante', pathMatch: 'full'
+    path : "", redirectTo: 'home', pathMatch: 'full'
+  },
+  {
+    path : "home",
+    component : HomeComponent
   },
   {
     path : "fabricante",
@@ -61,6 +66,7 @@ const routes: Routes = [
     path : "vendas/novo/:id",
     component : VendaCadastroComponent
   },
+  { path: '**', redirectTo: 'home' },
 ];
 
 @NgModule({

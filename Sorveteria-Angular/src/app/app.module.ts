@@ -13,7 +13,6 @@ import { CadastrarSorveteComponent } from './sorvete/cadastrar-sorvete/cadastrar
 import { ModalComponent } from './shared/modal/modal.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsModalRef, BsModalService, ModalModule } from 'ngx-bootstrap/modal';
-import { HomeComponent } from './shared/home/home.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
@@ -29,6 +28,9 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { VendaCadastroComponent } from './venda/cadastro-vendas/cadastro-vendas.component';
 import { ListarVendasComponent } from './venda/listar-vendas/listar-vendas.component';
 import { CadastrarSaboresComponent } from './sabores/cadastrar-sabores/cadastrar-sabores.component';
+import { HomeComponent } from './home/home.component';
+import { FooterComponent } from './shared/footer/footer.component';
+
 
 
 
@@ -50,6 +52,7 @@ import { CadastrarSaboresComponent } from './sabores/cadastrar-sabores/cadastrar
     VendaCadastroComponent,
     ListarVendasComponent,
     CadastrarSaboresComponent,
+    FooterComponent,
     
   ],
   imports: [
