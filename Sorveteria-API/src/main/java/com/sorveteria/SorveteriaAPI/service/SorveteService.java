@@ -22,6 +22,10 @@ public class SorveteService {
         return sorveteRepository.findAll();
     }
 
+    public List<Sorvete> findByNome(String nome) {
+        return sorveteRepository.findByNomeContainingOrderByNome(nome);
+    }
+
     public ResponseEntity<Sorvete> findSorveteById(Long id) {
         return sorveteRepository.findById(id)
                 .map(record -> ResponseEntity.ok().body(record))
@@ -32,8 +36,13 @@ public class SorveteService {
         return sorveteRepository.findById(id)
                                 .map(record -> {
                                     record.setNome(sorvete.getNome());
-                                    record.setSabor(sorvete.getSabor());
+                                    record.setSabores(sorvete.getSabores());
+                                    record.setQuantidadeEstoque(sorvete.getQuantidadeEstoque());
                                     record.setFabricante(sorvete.getFabricante());
+                                    record.setValor(sorvete.getValor());
+                                    record.setValorFabrica(sorvete.getValorFabrica());
+                                    record.setDtCompra(sorvete.getDtCompra());
+                                    record.setDtValidade(sorvete.getDtValidade());
                                     Sorvete update = sorveteRepository.save(record);
                                     return ResponseEntity.ok().body(update);
                                 }).orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
@@ -45,4 +54,5 @@ public class SorveteService {
                                     return ResponseEntity.ok().body(id);
                                 }).orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
+
 }

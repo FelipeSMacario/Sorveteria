@@ -19,6 +19,10 @@ export class SorveteService {
     return this.httpClient.get<Sorvete>(`${this.sorveteUrl}/${id}`);
   }
 
+  findSorveteByNome(nome : string) : Observable<Sorvete[]>{
+    return this.httpClient.get<Sorvete[]>(`${this.sorveteUrl, "search?nome="}/${nome}`)
+  }
+
   saveSorvete(sorvete : Sorvete) : Observable<Sorvete> {
     if(sorvete.id) 
     return this.httpClient.put<Sorvete>(`${this.sorveteUrl}/${sorvete.id}`, sorvete);

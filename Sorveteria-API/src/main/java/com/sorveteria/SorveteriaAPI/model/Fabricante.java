@@ -21,6 +21,6 @@ public class Fabricante {
     @Column(name = "nome", nullable = false)
     private String nome;
 
-    @Column(name = "contato", nullable = true)
+    @Column(name = "contato", nullable = false)
     private String contato;
 }

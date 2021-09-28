@@ -5,6 +5,7 @@ export class Sorvete {
     id : number;
     nome : string ;
     sabores : Array<Sabores>;
+    quantidadeEstoque : number;
     valor : number;
     valorFabrica : number;
     dtCompra : Date;
