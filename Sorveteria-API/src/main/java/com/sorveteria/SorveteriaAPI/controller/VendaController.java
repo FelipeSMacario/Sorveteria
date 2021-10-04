@@ -30,8 +30,13 @@ public class VendaController {
     }
 
     @GetMapping
-    public Page<Venda> listALlVenda(@PageableDefault(size = 10) Pageable pageable){
-        return vendaService.listALlVenda(pageable);
+    public List<Venda> listALlVenda(){
+        return vendaService.listALlVenda();
+    }
+
+    @GetMapping("/search")
+    public List<Venda> filtrarSorvete(String nome){
+        return vendaService.filtrarSorvete(nome);
     }
 
     @GetMapping("/{id}")

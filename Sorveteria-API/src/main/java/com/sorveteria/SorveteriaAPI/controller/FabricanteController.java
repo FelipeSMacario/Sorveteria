@@ -27,6 +27,9 @@ public class FabricanteController {
         return fabricanteService.findAll();
     }
 
+    @GetMapping("/search")
+    public List<Fabricante> findByNome(String nome) {return fabricanteService.findByNome(nome);}
+
     @GetMapping("/{id}")
     public ResponseEntity<Fabricante> umFabricante(@Valid @PathVariable Long id) {
         return fabricanteService.findById(id);

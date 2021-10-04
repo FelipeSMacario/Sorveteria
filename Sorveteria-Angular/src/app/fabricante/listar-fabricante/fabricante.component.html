@@ -1,14 +1,35 @@
 <h2 class="text-center text-center">Fabricantes</h2>
 
 <div class="form-group row">
-    <label class="col-sm-2 col-form-label" style="font-weight: bold; font-size:25px;">Buscar:</label>
-    
-    <div class="col-sm-9">
-        <input class="form-control">
-    </div>
-    <div class="col-sm-1">
-        <a [routerLink]="['novo']" class="btn btn-success" style="width: 82px; height: 38px;">Criar</a>
-    </div>
+    <form [formGroup]="cadastro">
+        <div class="form-group row">
+          <label
+            class="col-sm-2 col-form-label"
+            style="font-weight: bold; font-size: 25px"
+            >Buscar:</label
+          >
+      
+          <div class="col-sm-7">
+            <input formControlName="nome" class="form-control" />
+          </div>
+      
+          <div class="col-sm-1">      
+            <button (click)="filtrar()" mat-icon-button aria-label="Example icon-button with a heart icon">
+              <mat-icon>search</mat-icon>
+            </button>
+          </div>
+      
+          <div class="col-sm-1">
+            <button (click)="limpar()" mat-icon-button aria-label="Example icon-button with a heart icon">
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </div>
+      
+          <div class="col-sm-1">
+            <a [routerLink]="['novo']" class="btn btn-success criar">Criar</a>
+          </div>
+        </div>
+      </form>
 
 </div>
 

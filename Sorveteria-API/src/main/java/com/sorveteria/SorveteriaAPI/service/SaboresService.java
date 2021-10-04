@@ -23,6 +23,7 @@ public class SaboresService {
         return saboresRepository.findAll();
     }
 
+    public List<Sabores> findByNome(String nome) {return saboresRepository.findByNomeContaining(nome);}
 
     public ResponseEntity<Sabores> findById(Long id){
         return saboresRepository.findById(id)

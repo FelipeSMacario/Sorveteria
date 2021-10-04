@@ -22,8 +22,9 @@ public class SorveteService {
         return sorveteRepository.findAll();
     }
 
+
     public List<Sorvete> findByNome(String nome) {
-        return sorveteRepository.findByNomeContainingOrderByNome(nome);
+        return sorveteRepository.findByNomeContaining(nome);
     }
 
     public ResponseEntity<Sorvete> findSorveteById(Long id) {

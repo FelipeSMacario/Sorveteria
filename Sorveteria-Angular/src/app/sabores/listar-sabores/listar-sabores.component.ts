@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { EMPTY } from 'rxjs';
 import { switchMap, take } from 'rxjs/operators';
@@ -14,22 +14,27 @@ import { SaboresService } from '../sabores.service';
   styleUrls: ['./listar-sabores.component.css']
 })
 export class ListarSaboresComponent implements OnInit {
-  [x: string]: any;
+  
 
   sabores : Sabores[] = [];
-  form : string = "formSabor";
-  formSabor : FormGroup;
-  id : number;
+
+  cadastro : FormGroup;
+  nome : string;
   
 
   constructor(
     private saboresService : SaboresService,
     private modalService : ModalService,
     private router : Router,
+    private fb : FormBuilder
   ) { }
 
   ngOnInit(): void {
     this.findAllSabores();   
+
+    this.cadastro = this.fb.group({
+      nome : [" "]
+    })
   }
   findAllSabores() : void {
     this.saboresService.findAllSabores().subscribe({
@@ -51,7 +56,18 @@ export class ListarSaboresComponent implements OnInit {
     ).subscribe(
       sucess => {this.modalService.handleMessage("Sorvete excluído com sucesso", "success"); this.findAllSabores()},
       error => this.modalService.handleMessage("Erro ao excluir o sorvete, tente novamente mais tarde", "danger")
-      )
+      )  
+    }
+
+    filtrar(){
+      this.saboresService.findSaboresByNome(this.cadastro.value.nome).subscribe({
+        next : (valor) => {this.sabores = valor; },
+        error : err => console.log(err)
+      })
+    }
   
+    limpar(){
+      this.cadastro.reset();
+      this.findAllSabores();
     }
 }

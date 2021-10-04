@@ -16,6 +16,10 @@ export class FabricanteService {
     return this.httpCliente.get<Fabricante[]>(`${this.fabricanteUrl}`);
   }
 
+  findFabricantesByNome(nome : string) : Observable<Fabricante[]>{
+    return this.httpCliente.get<Fabricante[]>(`${this.fabricanteUrl}/search?nome=${nome}`)
+  }
+
   findFabricanteById(id : number) : Observable<Fabricante> {
     return this.httpCliente.get<Fabricante>(`${this.fabricanteUrl}/${id}`);
   }

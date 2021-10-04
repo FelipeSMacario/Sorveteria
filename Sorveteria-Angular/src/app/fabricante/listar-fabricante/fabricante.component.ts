@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { EMPTY } from 'rxjs';
@@ -17,14 +18,21 @@ export class FabricanteComponent implements OnInit {
   fabricantes: Fabricante[] = [];
   bsModalRef : BsModalRef;
 
+  cadastro : FormGroup;
+
   constructor(
     private fabricanteService: FabricanteService,
     private router: Router,
-    private modalService : ModalService
+    private modalService : ModalService,
+    private fb : FormBuilder
   ) {}
 
   ngOnInit(): void {
     this.findAllFabricantes();
+
+    this.cadastro = this.fb.group({
+      nome : [" "]
+    })
   }
 
   findAllFabricantes(): void {
@@ -47,6 +55,18 @@ export class FabricanteComponent implements OnInit {
       sucess => {this.modalService.handleMessage("Sorvete excluído com sucesso", "success"); this.findAllFabricantes()},
       error => this.modalService.handleMessage("Erro ao excluir o sorvete, tente novamente mais tarde", "danger")
     )
+  }
+
+  filtrar(){
+    this.fabricanteService.findFabricantesByNome(this.cadastro.value.nome).subscribe({
+      next : (valor) => {this.fabricantes = valor},
+      error : err => console.log(err)
+    })
+  }
+
+  limpar(){
+    this.cadastro.reset();
+    this.findAllFabricantes();
   }
 
 }

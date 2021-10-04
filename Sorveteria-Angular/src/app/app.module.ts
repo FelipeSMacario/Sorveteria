@@ -30,6 +30,7 @@ import { ListarVendasComponent } from './venda/listar-vendas/listar-vendas.compo
 import { CadastrarSaboresComponent } from './sabores/cadastrar-sabores/cadastrar-sabores.component';
 import { HomeComponent } from './home/home.component';
 import { FooterComponent } from './shared/footer/footer.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 
@@ -69,6 +70,7 @@ import { FooterComponent } from './shared/footer/footer.component';
     MatButtonModule,
     MatIconModule,
     MatMenuModule,
+    NgxPaginationModule,
     TabsModule,
     BsDatepickerModule.forRoot(),
   ],

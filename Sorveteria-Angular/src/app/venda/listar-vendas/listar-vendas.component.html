@@ -1,18 +1,39 @@
-<h2 class="text-center text-center">Vendas </h2>
+<h2 class="text-center text-center">Vendas</h2>
 
 <div class="form-group row">
-  <label class="col-sm-2 col-form-label" style="font-weight: bold; font-size:25px;">Buscar:</label>
+  <form [formGroup]="cadastro">
+    <div class="form-group row">
+      <label
+        class="col-sm-2 col-form-label"
+        style="font-weight: bold; font-size: 25px"
+        >Buscar:</label
+      >
   
-  <div class="col-sm-9">
-      <input class="form-control">
-  </div>
-  <div class="col-sm-1">
-      <a class="btn btn-success" style="width: 82px; height: 38px;" [routerLink]="['novo']" >Criar</a>
-  </div>
+      <div class="col-sm-7">
+        <input formControlName="nome" class="form-control" />
+      </div>
+  
+      <div class="col-sm-1">      
+        <button (click)="filtrar()" mat-icon-button aria-label="Example icon-button with a heart icon">
+          <mat-icon>search</mat-icon>
+        </button>
+      </div>
+  
+      <div class="col-sm-1">
+        <button (click)="limpar()" mat-icon-button aria-label="Example icon-button with a heart icon">
+          <mat-icon>cancel</mat-icon>
+        </button>
+      </div>
+  
+      <div class="col-sm-1">
+        <a [routerLink]="['novo']" class="btn btn-success criar">Criar</a>
+      </div>
+    </div>
+  </form>
 
-<table class="table table-bordered">
+  <table class="table table-bordered">
     <thead>
-      <tr >
+      <tr>
         <th>Nome</th>
         <th>Sabor</th>
         <th>Quantidade</th>
@@ -22,27 +43,46 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let vend of vendas">
-        <td>{{vend.sorvete.nome}}</td>
-        <td>{{vend.sabores.nome}}</td>
-        <td>{{vend.qtdItemVenda}}</td>
-        <td>{{vend.sorvete.valor | currency:"R$ "}}</td>
-        <td>{{vend.qtdValorVenda | currency:"R$ "}}</td>
+      <tr
+        *ngFor="let vend of vendas | paginate : {
+          itemsPerPage: tableSize,
+          currentPage: page,
+          totalItems: count
+        };
+  let i = index"
+      >
+        <td>{{ vend.sorvete.nome }}</td>
+        <td>{{ vend.sabores.nome }}</td>
+        <td>{{ vend.qtdItemVenda }}</td>
+        <td>{{ vend.sorvete.valor | currency: "R$ " }}</td>
+        <td>{{ vend.qtdValorVenda | currency: "R$ " }}</td>
         <td>
-            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-                <mat-icon>menu</mat-icon>
-              </button>
-              <mat-menu #menu="matMenu">
-                <button mat-menu-item (click)="editVendas(vend.id)">
-                  <mat-icon>info</mat-icon>
-                  <span >Editar</span>
-                </button>
-                <button mat-menu-item (click)="modalDelete(vend)">
-                    <mat-icon>delete</mat-icon>
-                    <span>Excluir</span>
-                  </button>
-              </mat-menu>
+          <button
+            mat-icon-button
+            [matMenuTriggerFor]="menu"
+            aria-label="Example icon-button with a menu"
+          >
+            <mat-icon>menu</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="editVendas(vend.id)">
+              <mat-icon>info</mat-icon>
+              <span>Editar</span>
+            </button>
+            <button mat-menu-item (click)="modalDelete(vend)">
+              <mat-icon>delete</mat-icon>
+              <span>Excluir</span>
+            </button>
+          </mat-menu>
         </td>
       </tr>
     </tbody>
   </table>
+  <div class="d-flex justify-content-center">
+    <pagination-controls 
+      previousLabel="Prev" 
+      nextLabel="Next" 
+      (pageChange)="onTableDataChange($event)">
+    </pagination-controls>
+  </div>
+</div>

@@ -26,6 +26,9 @@ public class SaboresController {
         return saboresService.findAllSabores();
     }
 
+    @GetMapping("/search")
+    public List<Sabores> findByNome(String nome) {return saboresService.findByNome(nome);}
+
     @GetMapping("/{id}")
     public ResponseEntity<Sabores> findSaboresById(@Valid @PathVariable Long id){
         return saboresService.findById(id);

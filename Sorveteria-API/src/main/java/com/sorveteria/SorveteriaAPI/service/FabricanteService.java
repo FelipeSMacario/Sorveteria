@@ -23,6 +23,8 @@ public class FabricanteService {
         return fabricanteRepository.findAll();
     }
 
+    public List<Fabricante> findByNome(String nome) {return fabricanteRepository.findByNomeContaining(nome);}
+
     public ResponseEntity<Fabricante> findById(Long id) {
         return fabricanteRepository.findById(id)
                 .map(record -> ResponseEntity.ok().body(record))

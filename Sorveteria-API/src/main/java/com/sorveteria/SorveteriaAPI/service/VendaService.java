@@ -17,7 +17,6 @@ public class VendaService {
     @Autowired
     VendaRepository vendaRepository;
 
-
     public Venda createVenda(Venda venda) {
         return vendaRepository.save(venda);
     }
@@ -26,9 +25,11 @@ public class VendaService {
         vendaRepository.updateEstoque(id);
     }
 
-    public Page<Venda> listALlVenda(Pageable pageable){
-        return vendaRepository.findAll(pageable);
+    public List<Venda> listALlVenda(){
+        return vendaRepository.findAll();
     }
+
+    public List<Venda> filtrarSorvete(String nome) {return vendaRepository.filtrarSorvete(nome);}
 
     public ResponseEntity<Venda> findVendaById(Long id) {
         return vendaRepository.findById(id)

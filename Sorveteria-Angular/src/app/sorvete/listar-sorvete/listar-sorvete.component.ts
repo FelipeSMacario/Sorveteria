@@ -14,6 +14,9 @@ import { SorveteService } from '../sorvete.service';
 })
 export class ListarSorveteComponent implements OnInit {
 
+  cadastro : FormGroup;
+ 
+
   sorvete : Sorvete[] = [];
   sorveteFiltrado : Sorvete[] = [];
 
@@ -27,6 +30,11 @@ export class ListarSorveteComponent implements OnInit {
 
   ngOnInit(): void {
     this.findAllSorvete();
+    
+
+    this.cadastro = this.fb.group({
+      nome : [" "]
+    })
   
   }
 
@@ -53,6 +61,18 @@ export class ListarSorveteComponent implements OnInit {
         this.modalService.handleMessage("Erro ao eccluir o sorvete, tente novamente mais tarde", "danger");
         console.log("Erro", error);}
     )
+  }
+
+  filtrar(){
+    this.sorveteService.findSorveteByNome(this.cadastro.value.nome).subscribe({
+      next : (valor) => {this.sorvete = valor;  },
+      error : err => console.log(err)
+    })
+  }
+
+  limpar(){
+    this.cadastro.reset();
+    this.findAllSorvete();
   }
 
 }

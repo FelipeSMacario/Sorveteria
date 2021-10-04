@@ -1,6 +1,7 @@
 
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+
 import { Observable } from 'rxjs';
 import { Vendas } from './vendas';
 
@@ -10,11 +11,16 @@ import { Vendas } from './vendas';
 export class VendaService {
 
   vendaURL : string = "http://localhost:8080/vendas";
+  
 
   constructor(private httpCliente : HttpClient) { }
 
   findAllVendas() : Observable<Vendas[]>{
     return this.httpCliente.get<Vendas[]>(`${this.vendaURL}`);
+  }
+
+  findSorveteByNome(nome : string) : Observable<Vendas[]>{
+    return this.httpCliente.get<Vendas[]>(`${this.vendaURL}/search?nome=${nome}`)
   }
 
   saveVendas(vendas : Vendas) : Observable<Vendas>{

@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+
 import { EMPTY } from 'rxjs';
 import { switchMap, take } from 'rxjs/operators';
 import { ModalService } from 'src/app/shared/modal/modal.service';
 import { VendaService } from '../venda.service';
-import { Vendas } from '../vendas';
+import { Page, Vendas } from '../vendas';
 
 @Component({
   selector: 'app-listar-vendas',
@@ -14,19 +16,33 @@ import { Vendas } from '../vendas';
 export class ListarVendasComponent implements OnInit {
 
   vendas: Vendas[] = [];
+  
+  page = 1;
+  count = 0;
+  tableSize = 5;
+  tableSizes = [3, 6, 9, 12];
+
+  cadastro : FormGroup;
+  nome : string;
 
   constructor(
     private vendaService : VendaService,
     private router : Router,
-    private modal : ModalService) { }
+    private modal : ModalService,
+    private fb : FormBuilder
+    ) { }
 
   ngOnInit(): void {
     this.findAllVenda();
+
+    this.cadastro = this.fb.group({
+      nome : [" "]
+    })
   }
 
   findAllVenda() : void {
     this.vendaService.findAllVendas().subscribe({
-      next : vend => this.vendas = vend,
+      next : vend => {this.vendas = vend},
       error : err => console.log(err)
     })
   }
@@ -46,4 +62,27 @@ export class ListarVendasComponent implements OnInit {
     )
   }
 
+  onTableDataChange(event){
+    this.page = event;
+    this.findAllVenda();
+  }  
+
+  onTableSizeChange(event): void {
+    this.tableSize = event.target.value;
+    this.page = 1;
+    this.findAllVenda();
+  }  
+
+
+  filtrar(){
+    this.vendaService.findSorveteByNome(this.cadastro.value.nome).subscribe({
+      next : (valor) => {this.vendas = valor; },
+      error : err => console.log(err)
+    })
+  }
+
+  limpar(){
+    this.cadastro.reset();
+    this.findAllVenda();
+  }
 }

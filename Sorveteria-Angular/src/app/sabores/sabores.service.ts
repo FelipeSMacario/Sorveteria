@@ -15,6 +15,10 @@ export class SaboresService {
     return this.httpCliente.get<Sabores[]>(`${this.urlSabor}`);
   }
 
+  findSaboresByNome(nome : string) : Observable<Sabores[]>{
+    return this.httpCliente.get<Sabores[]>(`${this.urlSabor}/search?nome=${nome}`)
+  }
+
   findSaboresById(id : number) : Observable<Sabores> {
     return this.httpCliente.get<Sabores>(`${this.urlSabor}/${id}`)
   }
