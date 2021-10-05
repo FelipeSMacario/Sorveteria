@@ -21,6 +21,7 @@ export class CadastrarFabricanteComponent implements OnInit {
   fabricante: Fabricante;
   id : number;
 
+
   constructor(
     private fb: FormBuilder,
     private fabricanteService: FabricanteService,
@@ -34,27 +35,30 @@ export class CadastrarFabricanteComponent implements OnInit {
     if (this.id) {
       this.fabricanteService.findFabricanteById(this.id).subscribe((fabricante: Fabricante) => this.criarFormulario(fabricante));
     }  else { 
-        this.criarFormulario(this.formularioVazio());
+        this.formularioVazio();
       }
+
+      this.cadastro = this.fb.group({
+        nome: [null,[Validators.required, Validators.minLength(3), Validators.maxLength(256)]],
+        contato: [null],
+      })
 
   }
 
   criarFormulario(fabricante : Fabricante) : void{
     this.cadastro = this.fb.group({
       id: [fabricante.id],
-      nome: [fabricante.nome, [Validators.required]],
-      contato: [fabricante.contato, [Validators.required]],
+      nome: [fabricante.nome],
+      contato: [fabricante.contato],
     });
   }
 
-  formularioVazio(): Fabricante {
-    return {
-      id: null,
+  formularioVazio() {
+    this.cadastro = this.fb.group({
       nome: null,
       contato: null,
-    } as unknown as Fabricante;
+    })
   }
-
 
 
   findFabricanteById(id: number) {

@@ -8,11 +8,30 @@
         <label class="col-sm-2 col-form-label">Nome</label>
         <div class="col-sm-10">
             <input class="form-control" formControlName="nome" type="text" placeholder="Nome do sabor">
+            <ng-container *ngIf="cadastro.controls.nome.touched">
+                <span *ngIf="cadastro.controls.nome.errors?.required">
+                    <div class="alert alert-danger" role="alert">
+                        Campo Obrigatório
+                      </div>   
+                </span>
+
+                <span *ngIf="cadastro.controls.nome.errors?.minlength">
+                    <div class="alert alert-danger" role="alert">
+                        Valor minimo de 3 caracteres
+                      </div>                            
+                </span>
+
+                <span *ngIf="cadastro.controls.nome.errors?.maxlength">
+                    <div class="alert alert-danger" role="alert">
+                        Valor maximo de 256 caracteres
+                      </div>
+                </span>
+            </ng-container>
         </div>
     </div>
     <br>
     <div class="text-center">
-        <button  class="btn btn-primary" style="margin-right: 8px;" type="submit">Salvar</button>
+        <button  class="btn btn-primary" style="margin-right: 8px;" type="submit" [disabled]="!cadastro.valid">Salvar</button>
         <button  class="btn btn-secondary" type="button" [routerLink]="['/sabores']" >Voltar</button>
     </div>
 </form>

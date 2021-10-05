@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ModalService } from 'src/app/shared/modal/modal.service';
 import { Sabores } from '../sabores.model';
@@ -41,7 +41,7 @@ export class CadastrarSaboresComponent implements OnInit {
 
 
     this.cadastro = this.fb.group({
-      nome : [null]
+      nome : [null, [Validators.required, Validators.minLength(3), Validators.maxLength(256)]]
     })
   }
 

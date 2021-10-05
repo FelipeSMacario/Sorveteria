@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { formatDate } from '@angular/common';
+import { Component, Input, OnInit } from '@angular/core';
 import {
   FormArray,
   FormBuilder,
@@ -7,6 +8,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+
 import { Fabricante } from 'src/app/fabricante/fabricante.model';
 import { FabricanteService } from 'src/app/fabricante/fabricante.service';
 import { Sabores } from 'src/app/sabores/sabores.model';
@@ -59,28 +61,29 @@ export class CadastrarSorveteComponent implements OnInit {
 
     this.cadastro = this.fb.group({
       id: [null],
-      nome: [null, [Validators.required]],
+      nome: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(256)]],
       sabores: this.fb.array([]),
-      quantidadeEstoque : [null, [Validators.required]],
-      valor: [null, [Validators.required]],
-      valorFabrica: [null, [Validators.required]],
+      validacao : [null, [Validators.min(1), Validators.required]],
+      quantidadeEstoque : [null, [Validators.required, Validators.min(1), Validators.max(10000)]],
+      valor: [null, [Validators.required, Validators.min(0.1)]],
+      valorFabrica: [null, [Validators.required, Validators.min(0.1)]],
       dtCompra: [null, [Validators.required]],
-      dtValidade: [null, [Validators.required]],
+      dtValidade: [null, [Validators.required, this.validaValidade]],
       fabricante: [null, [Validators.required]],
     });
   }
 
-
   criarFormulario(sorvete: Sorvete): void {
     this.cadastro = this.fb.group({
       id: [sorvete.id],
-      nome: [sorvete.nome, [Validators.required]],
+      nome: [sorvete.nome, [Validators.required, Validators.minLength(3), Validators.maxLength(256)]],
       sabores: this.arraySabores,
-      quantidadeEstoque : [sorvete.quantidadeEstoque, [Validators.required]],
-      valor: [sorvete.valor, [Validators.required]],
-      valorFabrica: [sorvete.valorFabrica, [Validators.required]],
+      validacao : [sorvete.sabores.length, [Validators.min(1), Validators.required]],
+      quantidadeEstoque : [sorvete.quantidadeEstoque, [Validators.required, Validators.min(1), Validators.max(10000)]],
+      valor: [sorvete.valor, [Validators.required, Validators.min(0.1)]],
+      valorFabrica: [sorvete.valorFabrica, [Validators.required, Validators.min(0.1)]],
       dtCompra: [sorvete.dtCompra, [Validators.required]],
-      dtValidade: [sorvete.dtValidade, [Validators.required]],
+      dtValidade: [sorvete.dtValidade, [Validators.required, this.validaValidade]],
       fabricante: [sorvete.fabricante, [Validators.required]],
     });
   }
@@ -88,14 +91,14 @@ export class CadastrarSorveteComponent implements OnInit {
   formularioVazio() {
     this.cadastro = this.fb.group({
       id: [null],
-      nome: [null, [Validators.required]],
+      nome: [null],
       sabores: this.fb.array([]),
-      quantidadeEstoque : [null, [Validators.required]],
-      valor: [null, [Validators.required]],
-      valorFabrica: [null, [Validators.required]],
-      dtCompra: [null, [Validators.required]],
-      dtValidade: [null, [Validators.required]],
-      fabricante: [null, [Validators.required]],
+      quantidadeEstoque : [null],
+      valor: [null],
+      valorFabrica: [null],
+      dtCompra: [null],
+      dtValidade: [null],
+      fabricante: [null],
     });
   }
 
@@ -143,7 +146,7 @@ export class CadastrarSorveteComponent implements OnInit {
       next: (sab) => {
         this.sabores = sab;
         this.sabores.forEach(() =>
-          this.arraySabores.push(new FormControl(false))
+          this.arraySabores.push(new FormControl(false,[Validators.required]))
         );
       },
       error: (err) => console.log('Erro', err),
@@ -161,6 +164,29 @@ export class CadastrarSorveteComponent implements OnInit {
         }
       }
     }
+  }
+
+  validaCheckbox(event){
+    if(event.target.checked){
+      this.cadastro.controls.validacao.setValue( this.cadastro.controls.validacao.value + 1);
+
+    } else {
+      this.cadastro.controls.validacao.setValue(this.cadastro.controls.validacao.value - 1);
+
+    }
+  }
+
+  validaValidade(input : FormControl) {
+    
+    const dataAtual = input.value;
+    let dataHoje = new Date();
+
+    if(dataAtual && dataAtual != "" ){
+      return formatDate(dataAtual, "dd/MM/yyyy", 'en-US')
+       > formatDate(dataHoje, "dd/MM/yyyy", 'en-US') ? null : {dataInvalida : true};
+    }
+
+    return null
   }
 
 }

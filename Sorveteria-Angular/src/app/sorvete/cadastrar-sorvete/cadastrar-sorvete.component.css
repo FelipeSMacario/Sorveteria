@@ -23,5 +23,6 @@
   display: inline-block;
   flex-grow: 1;
   height: 30px;
-  width: calc(100% * (1/10) - 10px - 1px);
+  width: calc(100% * (4/10) - 10px - 1px);
+  
 }

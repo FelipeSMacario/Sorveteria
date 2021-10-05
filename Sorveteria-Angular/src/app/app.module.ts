@@ -31,6 +31,7 @@ import { CadastrarSaboresComponent } from './sabores/cadastrar-sabores/cadastrar
 import { HomeComponent } from './home/home.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { CommonModule } from '@angular/common';
 
 
 
@@ -67,6 +68,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     MatFormFieldModule,
     MatInputModule, 
     MatNativeDateModule,
+    CommonModule,
     MatButtonModule,
     MatIconModule,
     MatMenuModule,

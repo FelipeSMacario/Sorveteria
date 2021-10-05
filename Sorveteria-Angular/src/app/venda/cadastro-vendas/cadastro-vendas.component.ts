@@ -49,7 +49,7 @@ export class VendaCadastroComponent implements OnInit {
       id : [null],
       sorvete: [null, [Validators.required]],
       sabores: [null, [Validators.required]],
-      qtdItemVenda: [null, [Validators.required]],
+      qtdItemVenda: [null, [Validators.required, Validators.min(1), Validators.max(10000)]],
       qtdValorVenda: [null, [Validators.required]],
     });
   }

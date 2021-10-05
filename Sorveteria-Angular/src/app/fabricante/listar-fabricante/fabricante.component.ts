@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { EMPTY } from 'rxjs';
 import { switchMap, take } from 'rxjs/operators';
-import { AlertModalComponent } from 'src/app/shared/alert-modal/alert-modal.component';
+
 import { ModalService } from 'src/app/shared/modal/modal.service';
 import { Fabricante } from '../fabricante.model';
 import { FabricanteService } from '../fabricante.service';
@@ -29,9 +29,12 @@ export class FabricanteComponent implements OnInit {
 
   ngOnInit(): void {
     this.findAllFabricantes();
+    this.cadastroForm();   
+  }
 
-    this.cadastro = this.fb.group({
-      nome : [" "]
+  cadastroForm(){
+    this.cadastro = this.fb.group({      
+      nome : [null]
     })
   }
 
@@ -58,10 +61,11 @@ export class FabricanteComponent implements OnInit {
   }
 
   filtrar(){
+    if (this.cadastro.value.nome != null) {
     this.fabricanteService.findFabricantesByNome(this.cadastro.value.nome).subscribe({
-      next : (valor) => {this.fabricantes = valor},
+      next : (valor) => {this.fabricantes = valor; this.cadastro.reset()},
       error : err => console.log(err)
-    })
+    })}
   }
 
   limpar(){
